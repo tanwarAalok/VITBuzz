@@ -1,0 +1,36 @@
+.navbarComponent{
+  background-color: #020381;
+  height: 70px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white
+}
+
+.navbarComponent a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.navbarComponent a:hover{
+    opacity: 0.8;
+}
+
+.logoBox{
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.logo{
+    font-size: 32px;
+    cursor: pointer;
+}
+.logo:hover{
+    opacity: 0.8;
+}
+
+.logo span{
+    font-size: 24px;
+    font-family: cursive;
+}
