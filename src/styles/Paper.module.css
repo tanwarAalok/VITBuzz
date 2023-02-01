@@ -1,0 +1,9 @@
+.paperPage{
+    height: calc(100vh - 70px);
+    width: 100vw;
+}
+
+.paperPage img{
+    width: 100%;
+    height: 100%;
+}

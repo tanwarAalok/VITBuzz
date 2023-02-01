@@ -1,0 +1,9 @@
+.placementPage{
+    height: calc(100vh - 70px);
+    width: 100vw;
+}
+
+.placementPage img{
+    width: 100%;
+    height: 100%;
+}

@@ -105,3 +105,24 @@ a {
     color-scheme: dark;
   }
 } */
+
+
+.cover{
+    position: absolute;
+    background-color: #19BD9B;
+    width: 180px;
+    height: 100px;
+    top: 170px;
+    left: 140px;
+}
+
+.cover2{
+    position: absolute;
+    background-color: #19BD9B;
+    /* border: 2px solid black; */
+    width: 350px;
+    height: 150px;
+    bottom: 180px;
+    left: 140px;
+
+}
