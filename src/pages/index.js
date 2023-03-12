@@ -47,9 +47,9 @@ export default function Home() {
       <div className={styles.topFaculty}>
         <h2>Top Rated Professors</h2>
         <div className={styles.boxParent}>
-          {
-            topFaculty?.map((prof) => <FacultyCard key={prof.email} data={prof} />)
-          }
+          {topFaculty?.map((prof) => (
+            <FacultyCard key={prof.email} data={prof} />
+          ))}
         </div>
       </div>
 
@@ -60,15 +60,22 @@ export default function Home() {
         <div className={styles.cscp}>
           <Image src={leftArrow} alt="left Arrow" width="50" height="50" />
           <div className={styles.cvc}>
-            <iframe src="https://www.youtube.com/watch?v=ZzE2ejjyEKM"></iframe>
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/ZzE2ejjyEKM"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
           </div>
           <Image src={rightArrow} alt="right Arrow" width="50" height="50" />
         </div>
       </div>
       {/* *************************************** */}
 
-      <Footer/>
-      
+      <Footer />
     </>
   );
 }

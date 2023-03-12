@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar'
 import React, { useEffect, useState } from 'react'
 import styles from "@/styles/FacultyPage.module.css"
 import FacultyCard from '@/components/FacultyCard';
-import filterImg from "../assets/filterImg.png";
+import filterImg from "../../assets/filterImg.png";
 import Image from 'next/image';
 const Faculty = () => {
   const [allFaculty, setAllfaculty] = useState(null);

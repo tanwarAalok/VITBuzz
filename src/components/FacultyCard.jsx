@@ -2,11 +2,13 @@ import Image from 'next/image';
 import React from 'react'
 import styles from "@/styles/FacultyCard.module.css"
 import ReactStars from "react-rating-stars-component";
+import { useRouter } from 'next/router';
 
-const FacultyCard = ({data}) => {
+const FacultyCard = ({ data }) => {
+  const router = useRouter();
   return (
     <div className={styles.profBox}>
-      <Image src={data.image} alt="sriramImage" width="350" height="400" />
+      <Image src={data.image} alt="Image" width="350" height="400" />
       <h3>{data.name}</h3>
       <div className={styles.starDiv}>
         <ReactStars
@@ -18,7 +20,7 @@ const FacultyCard = ({data}) => {
           activeColor={"#ffd700"}
         />
       </div>
-      <p>
+      <p onClick={() => router.push(`faculty/${data._id}`)}>
         more info..&nbsp;&nbsp;<span>→</span>
       </p>
     </div>
