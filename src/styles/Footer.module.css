@@ -1,4 +1,85 @@
 .footerContainer{
     height: 316px;
     background-color: #020381;
+    color: white;
+    margin-top: 5rem;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-bottom: 20rem;
+}
+.sectionOne{
+    /* margin-left: 2rem; */
+    margin-bottom: 2rem;
+}
+.sectionOne > h3{
+    font-size: 200%;
+}
+.sectionOne > h3 > span{
+    font-size: 70%;
+    font-family: 'permanent marker',cursive;
+    font-weight: normal;
+}
+
+.sectionTwo{
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+}
+.sectionTwo > div{
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 10rem;
+}
+.sectionTwo > div a{
+    font-size: 150%;
+    font-family: montserrat;
+    font-weight: 500;
+}
+
+.sectionThree{
+    margin-left: 1rem;
+    font-family: montserrat;
+    margin-bottom: 2rem;
+}
+.sectionThree > h4{
+    margin-bottom: 1rem;
+}
+
+.sectionThree > div > p{
+    font-weight: 300;
+}
+.sectionThree > div > p > span{
+    font-weight:500;
+}
+
+.sectionFour{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* M O B I L E  D I S P L A Y */
+
+@media (max-width: 500px){
+    .footerContainer{
+        padding-bottom: 30rem;
+    }
+    .sectionTwo{
+        flex-direction: column;
+    }
+    .sectionTwo > h4{
+        align-self: flex-start;
+        
+    }
+    .sectionTwo > div{
+        margin-top: 1rem;
+        align-self: flex-start;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    
 }

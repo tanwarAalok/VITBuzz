@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React from 'react'
 import comingSoon from "../assets/coming.png";
 import styles from "@/styles/Paper.module.css";
+import Footer from '@/components/Footer';
 
 const Paper = () => {
   return (
@@ -13,6 +14,7 @@ const Paper = () => {
         <div className="cover"></div>
         <div className="cover2"></div>
       </div>
+      <Footer />
     </>
   );
 }
