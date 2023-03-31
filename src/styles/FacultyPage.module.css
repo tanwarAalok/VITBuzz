@@ -89,5 +89,5 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-around;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
