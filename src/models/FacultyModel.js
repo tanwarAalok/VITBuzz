@@ -7,6 +7,9 @@ const FacultySchema = new mongoose.Schema({
   description: { type: String, required: true },
   gender: { type: String, required: true },
   overallRating: {type: Number, default: 0},
+  overallPaperRating: {type: Number, default: 0},
+  overallBehaviourRating: {type: Number, default: 0},
+  overallTeachingRating: {type: Number, default: 0},
   reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,

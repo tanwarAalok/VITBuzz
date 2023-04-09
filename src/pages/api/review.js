@@ -1,6 +1,5 @@
 const connectDatabase = require("../../utils/db");
 import NextCors from "nextjs-cors";
-const User = require("../../models/UserModel");
 const Faculty = require("../../models/FacultyModel");
 const Review = require("../../models/ReviewModel");
 
@@ -29,24 +28,48 @@ export default async function handler(req, res) {
     case "POST":
       try {
         const faculty = await Faculty.findById(facultyId);
-        const avgRating = (paperRating + behaviourRating + teachingRating) / 3;
+        const avgRating = (
+          (paperRating + behaviourRating + teachingRating) /
+          3
+        ).toFixed(1);
+
         const ratings = {
           avgRating,
           paperRating,
           behaviourRating,
           teachingRating,
         };
+
+        const {
+          overallRating,
+          overallBehaviourRating,
+          overallPaperRating,
+          overallTeachingRating,
+          reviews,
+        } = faculty;
+
+        faculty.overallRating = (
+          (overallRating * reviews.length + avgRating) /
+          (reviews.length + 1)
+        ).toFixed(1);
+        faculty.overallBehaviourRating = (
+          (overallBehaviourRating * reviews.length + overallBehaviourRating) /
+          (reviews.length + 1)
+        ).toFixed(1);
+        faculty.overallPaperRating = (
+          (overallPaperRating * reviews.length + overallPaperRating) /
+          (reviews.length + 1)
+        ).toFixed(1);
+        faculty.overallTeachingRating = (
+          (overallTeachingRating * reviews.length + overallTeachingRating) /
+          (reviews.length + 1)
+        ).toFixed(1);
+
         const body = { comment, ratings };
         const newReview = new Review(body);
 
         newReview.user = userId;
         faculty.reviews.push(newReview);
-
-        if (faculty.reviews.length === 1) {
-          faculty.overallRating = avgRating;
-        } else {
-          faculty.overallRating = (faculty.overallRating * (faculty.reviews.length - 1)) / faculty.reviews.length;
-        }
 
         await newReview.save();
         await faculty.save();

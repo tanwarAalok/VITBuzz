@@ -10,22 +10,22 @@ const BarColorWidth = (value) => {
     } else return { backgroundColor: "red", width: `${percentageValue}%` };
 };
 
-const RatingGraphs = ({ styles, reviews }) => {
-    let avgRating = 0, paperRating = 0, behaviourRating = 0, teachingRating = 0;
+const RatingGraphs = ({ styles, data }) => {
+    // let avgRating = 0, paperRating = 0, behaviourRating = 0, teachingRating = 0;
 
-    const totalReviews = reviews.length;
+    // const totalReviews = reviews.length;
 
-    reviews.map((review) => {
-        avgRating += review.ratings.avgRating;
-        paperRating += review.ratings.paperRating;
-        behaviourRating += review.ratings.behaviourRating;
-        teachingRating += review.ratings.teachingRating;
-    })
+    // reviews.map((review) => {
+    //     avgRating += review.ratings.avgRating;
+    //     paperRating += review.ratings.paperRating;
+    //     behaviourRating += review.ratings.behaviourRating;
+    //     teachingRating += review.ratings.teachingRating;
+    // })
 
-    avgRating = avgRating / totalReviews;
-    paperRating = paperRating / totalReviews;
-    behaviourRating = behaviourRating / totalReviews;
-    teachingRating = teachingRating / totalReviews;
+    // avgRating = avgRating / totalReviews;
+    // paperRating = paperRating / totalReviews;
+    // behaviourRating = behaviourRating / totalReviews;
+    // teachingRating = teachingRating / totalReviews;
 
   return (
     <Fragment>
@@ -33,7 +33,7 @@ const RatingGraphs = ({ styles, reviews }) => {
         <p>Overall Rating</p>
         <div className={styles.barParent}>
           <div
-            style={BarColorWidth(avgRating)}
+            style={BarColorWidthdata(data.overallRating)}
             className={styles.bar}
           ></div>
         </div>
@@ -42,7 +42,7 @@ const RatingGraphs = ({ styles, reviews }) => {
         <p>Paper Rating</p>
         <div className={styles.barParent}>
           <div
-            style={BarColorWidth(paperRating)}
+            style={BarColorWidth(data.overallPaperRating)}
             className={styles.bar}
           ></div>
         </div>
@@ -51,7 +51,7 @@ const RatingGraphs = ({ styles, reviews }) => {
         <p>Teaching Rating</p>
         <div className={styles.barParent}>
           <div
-            style={BarColorWidth(teachingRating)}
+            style={BarColorWidth(data.overallTeachingRating)}
             className={styles.bar}
           ></div>
         </div>
@@ -60,7 +60,7 @@ const RatingGraphs = ({ styles, reviews }) => {
         <p>Behaviour Rating</p>
         <div className={styles.barParent}>
           <div
-            style={BarColorWidth(behaviourRating)}
+            style={BarColorWidth(data.overallBehaviourRating)}
             className={styles.bar}
           ></div>
         </div>

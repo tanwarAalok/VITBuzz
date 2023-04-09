@@ -55,7 +55,7 @@ const FacultyDetails = () => {
         {data.reviews.length > 0 ? (
           <>
             <div className={styles.sec2}>
-              <RatingGraphs styles={styles} reviews={data.reviews}/>
+              <RatingGraphs styles={styles} data={data}/>
             </div>
 
             <div className={styles.sec3}>
