@@ -3,11 +3,21 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import styles from "@/styles/FacultyDetailPage.module.css";
 import Image from 'next/image';
+import RatingModal from '@/components/RatingModal';
+import Footer from '@/components/Footer';
+import ReviewCard from '@/components/ReviewCard';
+import RatingGraphs from '@/components/RatingGraphs';
+
 
 const FacultyDetails = () => {
-    const { query } = useRouter();
-    const [data, setData] = useState(null);
-    const [isLoading, setLoading] = useState(false);
+  const { query } = useRouter();
+  const [data, setData] = useState(null);
+  
+  const [isLoading, setLoading] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
     useEffect(() => {
       setLoading(true);
@@ -17,24 +27,10 @@ const FacultyDetails = () => {
           setData(d.data);
           setLoading(false);
         });
-    }, []);
+    }, [query]);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <h1>Loading..</h1>;
   if (!data) return <p>No data found</p>
-  
-  const { avgRating, paperRating, behaviourRating, teachingRating } = data?.ratings;
-
-  const BarColorWidth = (value) => {
-    const percentageValue = value * 20;
-
-    if (percentageValue >= 80) {
-      return {backgroundColor: "green", width: `${percentageValue}%`}
-    }
-    else if (percentageValue >= 50) {
-      return { backgroundColor: "yellow", width: `${percentageValue}%` };
-    }
-    else return { backgroundColor: "red", width: `${percentageValue}%` };
-  }
   
   return (
     <>
@@ -43,50 +39,38 @@ const FacultyDetails = () => {
         <div className={styles.sec1}>
           <div className={styles.imgCont}>
             <Image src={data?.image} alt="image" width="350" height="400" />
-            <div className={styles.ratingBtn}>Rate Teacher</div>
+            <div className={styles.ratingBtn} onClick={handleOpen}>
+              Rate Teacher
+            </div>
+            <RatingModal show={open} handleClose={handleClose} />
           </div>
-          <div className={styles.contentDiv}></div>
+          <div className={styles.contentDiv}>
+            <h1>{data?.name}</h1>
+            <div>
+              <p>{data?.description}</p>
+            </div>
+          </div>
         </div>
 
-        <div className={styles.sec2}>
-          <div className={styles.ratingDiv}>
-            <p>Overall Rating</p>
-            <div className={styles.barParent}>
-              <div
-                style={BarColorWidth(avgRating)}
-                className={styles.bar}
-              ></div>
+        {data.reviews.length > 0 ? (
+          <>
+            <div className={styles.sec2}>
+              <RatingGraphs styles={styles} reviews={data.reviews}/>
             </div>
-          </div>
-          <div className={styles.ratingDiv}>
-            <p>Paper Rating</p>
-            <div className={styles.barParent}>
-              <div
-                style={BarColorWidth(paperRating)}
-                className={styles.bar}
-              ></div>
+
+            <div className={styles.sec3}>
+              <h3>Reviews</h3>
+              {data?.reviews?.map((review) => (
+                <ReviewCard key={review._id} review={review} styles={styles} />
+              ))}
+
             </div>
-          </div>
-          <div className={styles.ratingDiv}>
-            <p>Teaching Rating</p>
-            <div className={styles.barParent}>
-              <div
-                style={BarColorWidth(teachingRating)}
-                className={styles.bar}
-              ></div>
-            </div>
-          </div>
-          <div className={styles.ratingDiv}>
-            <p>Behaviour Rating</p>
-            <div className={styles.barParent}>
-              <div
-                style={BarColorWidth(behaviourRating)}
-                className={styles.bar}
-              ></div>
-            </div>
-          </div>
-        </div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
+      <Footer />
     </>
   );
 }

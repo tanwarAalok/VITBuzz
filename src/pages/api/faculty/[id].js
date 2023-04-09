@@ -1,6 +1,6 @@
 const connectDatabase = require("../../../utils/db");
 import NextCors from "nextjs-cors";
-const Faculty = require("../../../modals/FacultyModal");
+const Faculty = require("../../../models/FacultyModel");
 
 connectDatabase();
 
@@ -18,7 +18,12 @@ export default async function handler(req, res) {
     case "GET":
       try {
         const { id } = req.query;
-        const faculty = await Faculty.findById(id);
+        const faculty = await Faculty.findById(id).populate({
+          path: "reviews",
+          populate: {
+            path: "user",
+          }
+        });
         res.status(200).json({ success: true, data: faculty });
       } catch (err) {
         res.status(400).json({ success: false, error: err.message });
@@ -26,11 +31,15 @@ export default async function handler(req, res) {
       break;
     case "PUT":
       try {
-        const faculty = await Faculty.findByIdAndUpdate(req.params.id, req.body, {
-          new: true,
-          runValidators: true,
-          useFindAndModify: false,
-        });
+        const faculty = await Faculty.findByIdAndUpdate(
+          req.params.id,
+          req.body,
+          {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false,
+          }
+        );
         res.status(200).json({ success: true, faculty });
       } catch (err) {
         res.status(400).json({ success: false, error: err.message });

@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: space-between;
   color: #020381;
+  cursor: pointer;
 }
 
 .profBox img{
@@ -15,9 +16,6 @@
   height: 76%;
 }
 
-.profBox > p{
-  cursor: pointer;
-}
 
 .starDiv{
   width: 100%;

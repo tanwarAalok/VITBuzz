@@ -6,15 +6,15 @@ const Navbar = () => {
   return (
     <div className={styles.navbarComponent}>
       <div className={styles.logoBox}>
-        <Link href="placements">Placements</Link>
-        <Link href="faculty">Faculty</Link>
+        <Link href="/placements">Placements</Link>
+        <Link href="/faculty">Faculty</Link>
       </div>
       <Link href="/" className={styles.logo}>
         VIT<span>Buzz</span>
       </Link>
       <div className={styles.logoBox}>
-        <Link href="clubs">Clubs</Link>
-        <Link href="papers">Papers</Link>
+        <Link href="/clubs">Clubs</Link>
+        <Link href="/papers">Papers</Link>
       </div>
     </div>
   );

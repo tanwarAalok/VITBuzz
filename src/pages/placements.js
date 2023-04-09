@@ -10,11 +10,9 @@ const Placement = () => {
     <>
       <Navbar/>
       <div className={styles.placementPage}>
-        <Image src={comingSoon} alt="coming soon image" />
-        <div className="cover"></div>
-        <div className="cover2"></div>
-        <Footer />
+        <h1 >Coming Soon....</h1>
       </div>
+      <Footer />
     </>
   )
 }

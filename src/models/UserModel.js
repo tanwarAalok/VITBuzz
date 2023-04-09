@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true },
-  rating: { type: String },
-  review: { type: String },
+  email: { type: String, required: true, unique: true },
 });
 
 mongoose.models = {};

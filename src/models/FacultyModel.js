@@ -6,15 +6,13 @@ const FacultySchema = new mongoose.Schema({
   image: { type: String, required: true },
   description: { type: String, required: true },
   gender: { type: String, required: true },
-  ratings: { 
-    avgRating: {type: String, default: 0},
-    paperRating: {type: String, default: 0},
-    behaviourRating: {type: String, default: 0},
-    teachingRating: {type: String, default: 0},
-  },
-  review: { type: String },
-  totalRatings: {type: String, default: 0},
-  totalReviews: {type: String, default: 0},
+  overallRating: {type: Number, default: 0},
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 mongoose.models = {};

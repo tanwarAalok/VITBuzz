@@ -1,9 +1,7 @@
-import Navbar from '@/components/Navbar'
-import Image from 'next/image';
-import React from 'react'
-import comingSoon from "../assets/coming.png";
+import Navbar from "@/components/Navbar";
+import React from "react";
 import styles from "@/styles/Paper.module.css";
-import Footer from '@/components/Footer';
+import Footer from "@/components/Footer";
 
 const Paper = () => {
   return (
@@ -15,6 +13,6 @@ const Paper = () => {
       <Footer />
     </>
   );
-}
+};
 
-export default Paper
+export default Paper;
