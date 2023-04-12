@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "vitbhopal.ac.in",
       },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+      },
     ],
   },
 };

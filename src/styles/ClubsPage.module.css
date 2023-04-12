@@ -1,0 +1,103 @@
+.paperPage{
+    min-height: calc(100vh - 70px);
+    width: 100vw;
+    padding-top: 50px;
+}
+
+.options{
+    margin-left: 20vw;
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+}
+
+.options input{
+    background: #ffffffa7;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    padding: 15px 60px;
+    border: 1px solid rgba(92, 92, 92, 0.69);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 0.4);
+    flex: 1;
+    
+}
+
+.options input:focus{
+    outline: none;
+}
+
+.options svg{
+    position: absolute;
+    top: 25%;
+    left: 20px;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.clubCardWrapper{
+    margin: 50px 10vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: space-between;
+
+}
+
+.clubcard{
+    height: 400px;
+    flex-basis: 350px;
+    /* flex-grow: 1; */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+}
+
+.clubcard > img{
+    height: 80%;
+}
+.clubContent{
+    margin-left: 7%;
+    height: 10%;
+    width: 86%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clubContent > p{
+    margin-top: 10px;
+    background-color: rgb(8, 8, 179);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 8px;
+}
+
+
+.clubLinks{
+    height: 10%;
+    width: 86%;
+    margin-left: 7%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.link{
+    cursor: pointer;
+}
+
+.clubcard > hr{
+    width: 86%;
+    margin: 5px 7%;
+}
