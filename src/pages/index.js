@@ -26,7 +26,7 @@ export default function Home() {
   if (isLoading) return <p>Loading...</p>;
 
   const topFaculty = allFaculty
-    ?.sort((a, b) => b.ratings.avgRating - a.ratings.avgRating)
+    ?.sort((a, b) => b.overallRating - a.overallRating)
     .slice(0, 3);
 
   return (
@@ -48,7 +48,7 @@ export default function Home() {
         <h2>Top Rated Professors</h2>
         <div className={styles.boxParent}>
           {topFaculty?.map((prof) => (
-            <FacultyCard key={prof.email} data={prof} />
+            <FacultyCard key={prof.email} data={prof} isFrontPage={true} />
           ))}
         </div>
       </div>

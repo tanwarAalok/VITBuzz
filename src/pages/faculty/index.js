@@ -49,7 +49,6 @@ const Faculty = () => {
         {/* *************************************** */}
 
         <div className={styles.f_right}>
-
           <div className={styles.f_right_top}>
             <input placeholder="Search Faculty by name..." />
             <svg
@@ -69,10 +68,9 @@ const Faculty = () => {
 
           <div className={styles.f_right_bottom}>
             {allFaculty?.map((prof) => (
-              <FacultyCard key={prof.email} data={prof} />
+              <FacultyCard key={prof.email} data={prof} isFrontPage={false} />
             ))}
           </div>
-
         </div>
       </div>
       <Footer />

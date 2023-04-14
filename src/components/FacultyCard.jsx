@@ -4,7 +4,7 @@ import styles from "@/styles/FacultyCard.module.css"
 import ReactStars from "react-rating-stars-component";
 import { useRouter } from 'next/router';
 
-const FacultyCard = ({ data }) => {
+const FacultyCard = ({ data, isFrontPage }) => {
   const router = useRouter();
   return (
     <div
@@ -12,7 +12,7 @@ const FacultyCard = ({ data }) => {
       onClick={() => router.push(`faculty/${data._id}`)}
     >
       <Image src={data.image} alt="Image" width="350" height="400" />
-      <h3>{data.name}</h3>
+      <h3 style={{ color: isFrontPage ? "white" : "#020381" }}>{data.name}</h3>
       <div className={styles.starDiv}>
         <ReactStars
           count={5}

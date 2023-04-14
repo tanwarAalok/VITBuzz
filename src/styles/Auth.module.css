@@ -1,0 +1,36 @@
+.adminPage{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(7, 79, 179, 0.988);
+}
+
+.authWrapper{
+    width: 500px;
+    height: 400px;
+   background-color: rgba(0, 0, 0, 0.323);
+   border-radius: 10px;
+    text-align: center;
+    color: white;
+    padding: 40px 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.authWrapper > h2{
+    /* color: rgb(228, 116, 24); */
+}
+
+.authWrapper > input{
+    margin-top: 20px;
+}
+
+.authWrapper > button{
+    margin-top: 20px;
+    padding: 5px 20px;
+    background-color: rgb(228, 116, 24);
+    color: white;
+    border: 0;
+}

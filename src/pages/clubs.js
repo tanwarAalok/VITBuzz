@@ -1,14 +1,29 @@
 import Navbar from "@/components/Navbar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/ClubsPage.module.css";
 import Footer from "@/components/Footer";
 import ClubCard from "@/components/ClubCard";
 
-const Paper = () => {
+export default function ClubPage() {
+
+   const [allClubs, setAllClubs] = useState(null);
+   const [isLoading, setLoading] = useState(false);
+
+   useEffect(() => {
+     setLoading(true);
+     fetch("/api/club")
+       .then((res) => res.json())
+       .then((data) => {
+         setAllClubs(data.club);
+         setLoading(false);
+       });
+   }, []);
+
+
   return (
     <>
       <Navbar />
-      <div className={styles.paperPage}>
+      <div className={styles.clubPage}>
         <div className={styles.options}>
           <input placeholder="Search Club name..." />
           <svg
@@ -24,18 +39,18 @@ const Paper = () => {
           </svg>
         </div>
 
-        <div className={styles.clubCardWrapper}>
-          <ClubCard styles={styles} />
-          <ClubCard styles={styles} />
-          <ClubCard styles={styles} />
-          <ClubCard styles={styles} />
-          <ClubCard styles={styles} />
-          <ClubCard styles={styles} />
-        </div>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className={styles.clubCardWrapper}>
+            {allClubs?.map((club) => (
+              <ClubCard key={club._id} styles={styles} data={club} />
+            ))}
+          </div>
+        )}
       </div>
       <Footer />
     </>
   );
 };
 
-export default Paper;
