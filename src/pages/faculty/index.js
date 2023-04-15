@@ -19,7 +19,6 @@ const Faculty = () => {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
   
   return (
     <>
@@ -67,9 +66,13 @@ const Faculty = () => {
           {/* *************************************** */}
 
           <div className={styles.f_right_bottom}>
-            {allFaculty?.map((prof) => (
-              <FacultyCard key={prof.email} data={prof} isFrontPage={false} />
-            ))}
+            {isLoading ? (
+              <h4>Loading...</h4>
+            ) : (
+              allFaculty?.map((prof) => (
+                <FacultyCard key={prof.email} data={prof} isFrontPage={false} />
+              ))
+            )}
           </div>
         </div>
       </div>

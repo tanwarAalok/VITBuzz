@@ -46,11 +46,15 @@ export default function Home() {
 
       <div className={styles.topFaculty}>
         <h2>Top Rated Professors</h2>
-        <div className={styles.boxParent}>
-          {topFaculty?.map((prof) => (
-            <FacultyCard key={prof.email} data={prof} isFrontPage={true} />
-          ))}
-        </div>
+        {isLoading ? (
+          <h3>Loading...</h3>
+        ) : (
+          <div className={styles.boxParent}>
+            {topFaculty?.map((prof) => (
+              <FacultyCard key={prof.email} data={prof} isFrontPage={true} />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* *************************************** */}

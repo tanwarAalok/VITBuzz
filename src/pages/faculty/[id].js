@@ -21,12 +21,16 @@ const FacultyDetails = () => {
 
     useEffect(() => {
       setLoading(true);
-      fetch(`/api/faculty/${query.id}`)
-        .then((res) => res.json())
-        .then((d) => {
-          setData(d.data);
-          setLoading(false);
-        });
+      if (query !== undefined) {
+        fetch(`/api/faculty/${query.id}`)
+          .then((res) => res.json())
+          .then((d) => {
+            console.log("DATA: ", d.data);
+            setData(d.data);
+            setLoading(false);
+          });
+      }
+      else setLoading(false);
     }, [query]);
 
   if (isLoading) return <h1>Loading..</h1>;

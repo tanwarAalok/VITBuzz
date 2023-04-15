@@ -28,27 +28,11 @@ export default async function handler(req, res) {
         res.status(400).json({ success: false, error: err.message });
       }
       break;
+    
     case "GET":
       try {
         const data = await Faculty.find({});
         res.status(400).json({ success: true, faculty: data });
-      } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
-      }
-      break;
-
-    case "PUT":
-      try {
-        const updatedFaculty = await Faculty.findByIdAndUpdate(
-          req.query.id,
-          req.body,
-          {
-            new: true,
-            runValidators: true,
-            useFindAndModify: false,
-          }
-        );
-        res.status(200).json({ success: true, updatedFaculty });
       } catch (err) {
         res.status(400).json({ success: false, error: err.message });
       }

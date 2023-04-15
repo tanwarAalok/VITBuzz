@@ -52,16 +52,17 @@ export default async function handler(req, res) {
           (overallRating * reviews.length + avgRating) /
           (reviews.length + 1)
         ).toFixed(1);
+
         faculty.overallBehaviourRating = (
-          (overallBehaviourRating * reviews.length + overallBehaviourRating) /
+          (overallBehaviourRating * reviews.length + behaviourRating) /
           (reviews.length + 1)
         ).toFixed(1);
         faculty.overallPaperRating = (
-          (overallPaperRating * reviews.length + overallPaperRating) /
+          (overallPaperRating * reviews.length + paperRating) /
           (reviews.length + 1)
         ).toFixed(1);
         faculty.overallTeachingRating = (
-          (overallTeachingRating * reviews.length + overallTeachingRating) /
+          (overallTeachingRating * reviews.length + teachingRating) /
           (reviews.length + 1)
         ).toFixed(1);
 

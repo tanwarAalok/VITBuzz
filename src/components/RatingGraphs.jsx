@@ -33,7 +33,7 @@ const RatingGraphs = ({ styles, data }) => {
         <p>Overall Rating</p>
         <div className={styles.barParent}>
           <div
-            style={BarColorWidthdata(data.overallRating)}
+            style={BarColorWidth(data.overallRating)}
             className={styles.bar}
           ></div>
         </div>

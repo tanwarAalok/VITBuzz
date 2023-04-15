@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Review = require("./ReviewModel")
 
 const FacultySchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -13,7 +14,7 @@ const FacultySchema = new mongoose.Schema({
   reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Review",
+      ref: Review,
     },
   ],
 });
