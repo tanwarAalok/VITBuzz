@@ -5,6 +5,8 @@ import FacultyCard from "@/components/FacultyCard";
 import filterImg from "../../assets/filterImg.png";
 import Image from "next/image";
 import Footer from "@/components/Footer";
+
+
 const Faculty = () => {
   const [allFaculty, setAllfaculty] = useState(null);
   const [isLoading, setLoading] = useState(false);

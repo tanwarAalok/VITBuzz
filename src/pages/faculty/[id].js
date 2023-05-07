@@ -7,9 +7,11 @@ import RatingModal from '@/components/RatingModal';
 import Footer from '@/components/Footer';
 import ReviewCard from '@/components/ReviewCard';
 import RatingGraphs from '@/components/RatingGraphs';
+import { useSession, signIn } from "next-auth/react";
 
 
 const FacultyDetails = () => {
+  const { data: session } = useSession();
   const { query } = useRouter();
   const [data, setData] = useState(null);
   
@@ -42,9 +44,15 @@ const FacultyDetails = () => {
         <div className={styles.sec1}>
           <div className={styles.imgCont}>
             <Image src={data?.image} alt="image" width="350" height="400" />
-            <div className={styles.ratingBtn} onClick={handleOpen}>
-              Rate Teacher
-            </div>
+            {session ? (
+              <div className={styles.ratingBtn} onClick={handleOpen}>
+                Rate Teacher
+              </div>
+            ) : (
+              <div className={styles.ratingBtn} onClick={() => signIn()}>
+                Sign in first to Rate Teacher
+              </div>
+            )}
             <RatingModal show={open} handleClose={handleClose} />
           </div>
           <div className={styles.contentDiv}>
@@ -58,7 +66,7 @@ const FacultyDetails = () => {
         {data.reviews.length > 0 ? (
           <>
             <div className={styles.sec2}>
-              <RatingGraphs styles={styles} data={data}/>
+              <RatingGraphs styles={styles} data={data} />
             </div>
 
             <div className={styles.sec3}>
@@ -66,7 +74,6 @@ const FacultyDetails = () => {
               {data?.reviews?.map((review) => (
                 <ReviewCard key={review._id} review={review} styles={styles} />
               ))}
-
             </div>
           </>
         ) : (

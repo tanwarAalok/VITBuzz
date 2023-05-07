@@ -1,16 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import VerificationForm from "./Verification";
 import { Button, Form, Modal, Spinner } from "react-bootstrap";
 import ReactStars from "react-stars";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 
 const RatingModal = ({ show, handleClose }) => {
-  const [isVerfied, setIsverified] = useState(
-    localStorage.getItem("User") !== null
-  );
+  const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [behaviourRating, setBehaviourRating] = useState(0);
   const [paperRating, setPaperRating] = useState(0);
@@ -20,14 +18,12 @@ const RatingModal = ({ show, handleClose }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem("User"));
-    if (!user) alert("Something went wrong");
 
     const body = {
       paperRating,
       behaviourRating,
       teachingRating,
-      userId: user._id,
+      user: session?.user,
       facultyId: query.id,
       comment,
     };
@@ -36,7 +32,6 @@ const RatingModal = ({ show, handleClose }) => {
     await axios
       .post("/api/review", body)
       .then(function (response) {
-        console.log(response?.data.data);
         alert("Review added");
         setLoading(false);
       })
@@ -49,12 +44,9 @@ const RatingModal = ({ show, handleClose }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>{isVerfied ? "Verify User" : "Rate Faculty"}</Modal.Title>
+        <Modal.Title>Rate Faculty</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {!isVerfied ? (
-          <VerificationForm setIsverified={setIsverified} />
-        ) : (
           <Form onSubmit={onSubmit}>
             <Form.Group
               className="mb-3 d-flex align-items-center justify-content-between"
@@ -126,7 +118,6 @@ const RatingModal = ({ show, handleClose }) => {
               )}
             </Button>
           </Form>
-        )}
       </Modal.Body>
     </Modal>
   );
