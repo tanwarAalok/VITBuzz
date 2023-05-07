@@ -25,7 +25,6 @@ const FacultyDetails = () => {
         fetch(`/api/faculty/${query.id}`)
           .then((res) => res.json())
           .then((d) => {
-            console.log("DATA: ", d.data);
             setData(d.data);
             setLoading(false);
           });

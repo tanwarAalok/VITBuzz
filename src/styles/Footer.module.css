@@ -1,15 +1,21 @@
 .footerContainer{
-    height: 316px;
+    max-height: 360px;
     background-color: #020381;
     color: white;
-    margin-top: 5rem;
+    margin-top: 2rem;
     padding-top: 2rem;
     padding-left: 2rem;
     padding-bottom: 20rem;
+    position: sticky;
+    bottom: 0;
+    overflow: hidden;
+    padding: 20px 40px;
 }
 .sectionOne{
-    /* margin-left: 2rem; */
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 .sectionOne > h3{
     font-size: 200%;
@@ -21,7 +27,7 @@
 }
 
 .sectionTwo{
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     margin-bottom: 2rem;
     display: flex; 
     align-items: center;
@@ -40,13 +46,11 @@
 }
 
 .sectionThree{
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     font-family: montserrat;
-    margin-bottom: 2rem;
-}
-.sectionThree > h4{
     margin-bottom: 1rem;
 }
+
 
 .sectionThree > div > p{
     font-weight: 300;

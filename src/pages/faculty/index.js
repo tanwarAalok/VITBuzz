@@ -1,13 +1,16 @@
-import Navbar from '@/components/Navbar'
-import React, { useEffect, useState } from 'react'
-import styles from "@/styles/FacultyPage.module.css"
-import FacultyCard from '@/components/FacultyCard';
+import Navbar from "@/components/Navbar";
+import React, { useEffect, useState } from "react";
+import styles from "@/styles/FacultyPage.module.css";
+import FacultyCard from "@/components/FacultyCard";
 import filterImg from "../../assets/filterImg.png";
-import Image from 'next/image';
-import Footer from '@/components/Footer';
+import Image from "next/image";
+import Footer from "@/components/Footer";
 const Faculty = () => {
   const [allFaculty, setAllfaculty] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const [gender, setGender] = useState(null);
+  const [sortRating, setSortRating] = useState(null);
+  const [filtered, setFiltered] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -15,11 +18,25 @@ const Faculty = () => {
       .then((res) => res.json())
       .then((data) => {
         setAllfaculty(data.faculty);
+        setFiltered(data.faculty);
         setLoading(false);
       });
   }, []);
 
-  
+  useEffect(() => {
+    if (gender === "default") {
+      setFiltered(allFaculty);
+    } else
+      setFiltered(allFaculty?.filter((faculty) => faculty.gender === gender));
+  }, [gender]);
+
+  filtered &&
+    filtered.sort((a, b) => {
+      return sortRating == 2
+        ? a.overallRating - b.overallRating
+        : b.overallRating - a.overallRating;
+    });
+
   return (
     <>
       <Navbar />
@@ -31,16 +48,15 @@ const Faculty = () => {
           </div>
 
           <div className={styles.filters}>
-            <select>
-              <option>Gender</option>
-              <option>Male</option>
-              <option>Female</option>
+            <select onChange={(e) => setGender(e.target.value)}>
+              <option value="default">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
 
-            <select>
-              <option>Rating</option>
-              <option>5 stars</option>
-              <option>4 stars</option>
+            <select onChange={(e) => setSortRating(e.target.value)}>
+              <option value={1}>Highest to Lowest</option>
+              <option value={2}>Lowest to highest</option>
             </select>
           </div>
         </div>
@@ -68,6 +84,18 @@ const Faculty = () => {
           <div className={styles.f_right_bottom}>
             {isLoading ? (
               <h4>Loading...</h4>
+            ) : filtered ? (
+              filtered.length === 0 ? (
+                <h3>Nothing available..</h3>
+              ) : (
+                filtered?.map((prof) => (
+                  <FacultyCard
+                    key={prof.email}
+                    data={prof}
+                    isFrontPage={false}
+                  />
+                ))
+              )
             ) : (
               allFaculty?.map((prof) => (
                 <FacultyCard key={prof.email} data={prof} isFrontPage={false} />
@@ -79,6 +107,6 @@ const Faculty = () => {
       <Footer />
     </>
   );
-}
+};
 
-export default Faculty
+export default Faculty;

@@ -11,7 +11,7 @@ const NewFaculty = () => {
         <AdminDrawer styles={styles} />
         <div className={styles.contentWrapper}>
           <div className={styles.rightTopHeader}>
-            <h2>Create Faculty</h2>
+            <h2>Add new Faculty</h2>
           </div>
                   <FacultyForm setData={setData} />
         </div>

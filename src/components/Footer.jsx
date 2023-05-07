@@ -1,15 +1,20 @@
 import React from 'react'
 import styles from "@/styles/Footer.module.css";
 import Link from 'next/link'
+import Image from 'next/image';
+import Logo from "public/logo.png";
 
 const Footer = () => {
   return (
     <footer className={styles.footerContainer}>
       <div className={styles.sectionOne}>
-        <h3>VIT <span>Buzz</span></h3>
+        <Image src={Logo} alt="logo" height={60} width={60} />
+        <h3>
+          VIT <span>Buzz</span>
+        </h3>
       </div>
       <div className={styles.sectionTwo}>
-        <h4>UNIVERSITY ADDRESS</h4>
+        <h4>University Address </h4>
         <div>
           <Link href="placements">Placements</Link>
           <Link href="papers">Papers</Link>
@@ -18,10 +23,10 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles.sectionThree}>
-        <h4>VIT Bhopai University</h4>
+        <h4>VIT Bhopal University</h4>
         <div>
           <p>
-            Bhopai-Indore Highway <br />
+            Bhopal-Indore Highway <br />
             Kothrikalan, Sehore <br />
             Madhya Pradesh - 466114 <br />
             Phone: <span>+91/0 75 6025 4500 / 501 / 502 </span>
@@ -32,7 +37,7 @@ const Footer = () => {
         <p> © 2023 All rights reserved</p>
       </div>
     </footer>
-  )
+  );
 }
 
 export default Footer

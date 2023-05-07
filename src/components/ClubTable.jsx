@@ -1,34 +1,24 @@
 import Table from "react-bootstrap/Table";
 
-function ClubTable() {
+function ClubTable({ data }) {
+  console.log("DATA: ", data);
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
           <th>Club Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Club Type</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {data?.map((club, idx) => (
+          <tr key={club._id}>
+            <td>{idx + 1}</td>
+            <td>{club.name}</td>
+            <td>{club.clubType}</td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );
