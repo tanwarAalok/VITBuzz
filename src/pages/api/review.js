@@ -1,7 +1,6 @@
 const connectDatabase = require("../../utils/db");
+import { Faculty, Review, User } from "@/models";
 import NextCors from "nextjs-cors";
-const Faculty = require("../../models/FacultyModel");
-const Review = require("../../models/ReviewModel");
 
 export default async function handler(req, res) {
   await NextCors(req, res, {
@@ -19,7 +18,7 @@ export default async function handler(req, res) {
     paperRating,
     behaviourRating,
     teachingRating,
-    userId,
+    userData,
     facultyId,
     comment,
   } = req.body;
@@ -69,7 +68,13 @@ export default async function handler(req, res) {
         const body = { comment, ratings };
         const newReview = new Review(body);
 
-        newReview.user = userId;
+        const userEmail = userData.email;
+        let user = await User.findOne({ userEmail });
+        if (!user) {
+          user = await User.create(userData);
+        }
+
+        newReview.user = user._id;
         faculty.reviews.push(newReview);
 
         await newReview.save();
@@ -82,14 +87,19 @@ export default async function handler(req, res) {
         res.status(400).json({ success: false, error: err.message });
       }
       break;
-    // case "GET":
-    //   try {
-    //     const users = await Faculty.find({});
-    //     res.status(400).json({ success: true, data: users });
-    //   } catch (err) {
-    //     res.status(400).json({ success: false, error: err.message });
-    //   }
-    //   break;
+    case "PUT":
+      try {
+        await Review.findByIdAndUpdate(req.body.id, req.body);
+        res
+          .status(400)
+          .json({
+            success: true,
+            message: "Review updated successfully !",
+          });
+      } catch (err) {
+        res.status(400).json({ success: false, error: err.message });
+      }
+      break;
 
     default:
       res.status(400).json({ success: false, message: "Invalid request" });

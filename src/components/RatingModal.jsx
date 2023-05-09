@@ -23,7 +23,7 @@ const RatingModal = ({ show, handleClose }) => {
       paperRating,
       behaviourRating,
       teachingRating,
-      user: session?.user,
+      userData: session.user,
       facultyId: query.id,
       comment,
     };

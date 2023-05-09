@@ -50,7 +50,7 @@ const FacultyDetails = () => {
               </div>
             ) : (
               <div className={styles.ratingBtn} onClick={() => signIn()}>
-                Sign in first to Rate Teacher
+                Rate Teacher
               </div>
             )}
             <RatingModal show={open} handleClose={handleClose} />

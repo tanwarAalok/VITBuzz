@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const User = require("./UserModel")
 const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
@@ -13,7 +12,7 @@ const ReviewSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: User
+    ref: 'User'
   },
 });
 
