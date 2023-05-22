@@ -1,0 +1,38 @@
+.searchWrapperParent{
+    height: 15vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchWrapper{
+    position: relative;  
+}
+
+.searchWrapper input{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 38.5px;
+    padding: 15px 60px;
+    border: 0;
+    width: 712px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.searchWrapper input:focus{
+    outline: none;
+}
+
+.searchWrapper svg{
+    position: absolute;
+    left: 20px;
+    top: 13px;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}

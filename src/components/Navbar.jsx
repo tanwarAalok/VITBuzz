@@ -34,7 +34,7 @@ const Navbar = () => {
         <Link href="/faculty">Faculty</Link>
         <Link href="/clubs">Clubs</Link>
         <Link href="/papers">Papers</Link>
-        <Link href="/placements">Placements</Link>
+        <Link href="/mentorship">Mentors</Link>
       </div>
 
       {!session ? (

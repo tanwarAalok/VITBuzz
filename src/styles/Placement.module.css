@@ -1,8 +1,0 @@
-.placementPage{
-    height: calc(100vh - 70px);
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-

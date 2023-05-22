@@ -1,4 +1,6 @@
 const connectDatabase = require("../../../utils/db");
+import { ErrorResponse, SuccessResponse } from "@/utils/common";
+import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
 const Faculty = require("../../../models/FacultyModel");
 
@@ -24,9 +26,11 @@ export default async function handler(req, res) {
             path: "user",
           },
         });
-        res.status(200).json({ success: true, data: faculty });
+        SuccessResponse.data = faculty;
+        res.status(StatusCodes.OK).json(SuccessResponse);
       } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        ErrorResponse.error.explanation = err.message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
       }
       break;
     case "PUT":
@@ -40,9 +44,11 @@ export default async function handler(req, res) {
             useFindAndModify: false,
           }
         );
-        res.status(200).json({ success: true, faculty });
+        SuccessResponse.data = faculty;
+        res.status(StatusCodes.OK).json(SuccessResponse);
       } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        ErrorResponse.error.explanation = err.message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
       }
 
     case "DELETE":
@@ -52,11 +58,13 @@ export default async function handler(req, res) {
           .status(200)
           .json({ success: true, message: "Faculty deleted successfully" });
       } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        ErrorResponse.error.explanation = err.message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
       }
 
     default:
-      res.status(400).json({ success: false, message: "Default request" });
+      ErrorResponse.error.explanation = "Not a valid request";
+      res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
       break;
   }
 }

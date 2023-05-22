@@ -1,36 +1,25 @@
 import Navbar from '@/components/Navbar'
 import styles from '@/styles/Home.module.css';
-import Image from 'next/image';
-
 import Footer from '@/components/Footer';
-import FacultyCard from '@/components/FacultyCard';
-import { useEffect, useState } from 'react';
 import LandingPage from '@/components/LandingPage';
+import useFetch from '@/utils/hooks/useFetch';
+import Loader from '@/components/Loading';
 
 
 export default function Home() {
-  const [allFaculty, setAllfaculty] = useState(null);
-  const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/faculty")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllfaculty(data.faculty);
-        setLoading(false);
-      });
-  }, []);
-
-
-  const topFaculty = allFaculty
-    ?.sort((a, b) => b.overallRating - a.overallRating)
-    .slice(0, 3);
+  const { isLoading, apiData, serverError } = useFetch("/api/faculty/top");
+  if (isLoading) return <Loader/>
+  if (serverError) console.log(serverError);
 
   return (
     <>
       <Navbar />
-      <LandingPage styles={styles} topFaculty={topFaculty} isLoading={isLoading} />
+      <LandingPage
+        styles={styles}
+        topFaculty={apiData}
+        isLoading={isLoading}
+      />
       <Footer />
     </>
   );

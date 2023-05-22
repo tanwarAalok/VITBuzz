@@ -5,39 +5,30 @@ import FacultyCard from "@/components/FacultyCard";
 import filterImg from "../../assets/filterImg.png";
 import Image from "next/image";
 import Footer from "@/components/Footer";
-
+import SearchBar from "@/components/SearchBar";
+import useFetch from "@/utils/hooks/useFetch";
+import { useRouter } from "next/router";
+import Loader from "@/components/Loading";
 
 const Faculty = () => {
-  const [allFaculty, setAllfaculty] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-  const [gender, setGender] = useState(null);
-  const [sortRating, setSortRating] = useState(null);
-  const [filtered, setFiltered] = useState(null);
+  const router = useRouter();
+
+  const [gender, setGender] = useState("");
+  const [sortType, setSortType] = useState("");
 
   useEffect(() => {
-    setLoading(true);
-    fetch("/api/faculty")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllfaculty(data.faculty);
-        setFiltered(data.faculty);
-        setLoading(false);
-      });
-  }, []);
+    if (router) {
+      if (router.query.gender) setGender(router.query.gender);
+      if (router.query.sortType) setSortType(router.query.sortType);
+    }
+  }, [router]);
 
-  useEffect(() => {
-    if (gender === "default") {
-      setFiltered(allFaculty);
-    } else
-      setFiltered(allFaculty?.filter((faculty) => faculty.gender === gender));
-  }, [gender]);
+  const { isLoading, apiData, serverError } = useFetch(
+    `/api/faculty?gender=${gender}&sortType=${sortType}`
+  );
 
-  filtered &&
-    filtered.sort((a, b) => {
-      return sortRating == 2
-        ? a.overallRating - b.overallRating
-        : b.overallRating - a.overallRating;
-    });
+  if (isLoading) return <Loader />;
+  if (serverError) console.log(serverError);
 
   return (
     <>
@@ -50,15 +41,36 @@ const Faculty = () => {
           </div>
 
           <div className={styles.filters}>
-            <select onChange={(e) => setGender(e.target.value)}>
-              <option value="default">Select Gender</option>
+            <select
+              value={gender}
+              onChange={(e) => {
+                const query = { ...router.query, gender: e.target.value };
+                if (e.target.value == "") {
+                  delete query.gender;
+                }
+                router.replace({ query: query });
+                setGender(e.target.value);
+              }}
+            >
+              <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </select>
 
-            <select onChange={(e) => setSortRating(e.target.value)}>
-              <option value={1}>Highest to Lowest</option>
-              <option value={2}>Lowest to highest</option>
+            <select
+              value={sortType}
+              onChange={(e) => {
+                const query = { ...router.query, sortType: e.target.value };
+                if (e.target.value == "") {
+                  delete query.sortType;
+                }
+                router.replace({ query: query });
+                setSortType(e.target.value);
+              }}
+            >
+              <option value="">Sort by Rating</option>
+              <option value={-1}>Highest to Lowest</option>
+              <option value={1}>Lowest to highest</option>
             </select>
           </div>
         </div>
@@ -66,40 +78,15 @@ const Faculty = () => {
         {/* *************************************** */}
 
         <div className={styles.f_right}>
-          <div className={styles.f_right_top}>
-            <input placeholder="Search Faculty by name..." />
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              strokeWidth="0"
-              viewBox="0 0 1024 1024"
-              height="1em"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M909.6 854.5L649.9 594.8C690.2 542.7 712 479 712 412c0-80.2-31.3-155.4-87.9-212.1-56.6-56.7-132-87.9-212.1-87.9s-155.5 31.3-212.1 87.9C143.2 256.5 112 331.8 112 412c0 80.1 31.3 155.5 87.9 212.1C256.5 680.8 331.8 712 412 712c67 0 130.6-21.8 182.7-62l259.7 259.6a8.2 8.2 0 0 0 11.6 0l43.6-43.5a8.2 8.2 0 0 0 0-11.6zM570.4 570.4C528 612.7 471.8 636 412 636s-116-23.3-158.4-65.6C211.3 528 188 471.8 188 412s23.3-116.1 65.6-158.4C296 211.3 352.2 188 412 188s116.1 23.2 158.4 65.6S636 352.2 636 412s-23.3 116.1-65.6 158.4z"></path>
-            </svg>
-          </div>
+          <SearchBar />
 
           {/* *************************************** */}
 
           <div className={styles.f_right_bottom}>
             {isLoading ? (
               <h4>Loading...</h4>
-            ) : filtered ? (
-              filtered.length === 0 ? (
-                <h3>Nothing available..</h3>
-              ) : (
-                filtered?.map((prof) => (
-                  <FacultyCard
-                    key={prof.email}
-                    data={prof}
-                    isFrontPage={false}
-                  />
-                ))
-              )
             ) : (
-              allFaculty?.map((prof) => (
+              apiData?.map((prof) => (
                 <FacultyCard key={prof.email} data={prof} isFrontPage={false} />
               ))
             )}

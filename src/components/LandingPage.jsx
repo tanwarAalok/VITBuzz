@@ -4,6 +4,7 @@ import Image from 'next/image';
 import vitImg from "../assets/vit1.png";
 import leftArrow from "../assets/leftArrow.png";
 import rightArrow from "../assets/rightArrow.png";
+import { Spinner } from 'react-bootstrap';
 
 const LandingPage = ({styles, topFaculty, isLoading}) => {
   return (
@@ -23,7 +24,7 @@ const LandingPage = ({styles, topFaculty, isLoading}) => {
       <div className={styles.topFaculty}>
         <h2>Top Rated Professors</h2>
         {isLoading ? (
-          <h3>Loading...</h3>
+          <Spinner/>
         ) : (
           <div className={styles.boxParent}>
             {topFaculty?.map((prof) => (

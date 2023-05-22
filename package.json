@@ -18,6 +18,7 @@
     "eslint-config-next": "13.1.6",
     "firebase": "^9.19.1",
     "formik": "^2.2.9",
+    "http-status-codes": "^2.2.0",
     "mongoose": "^6.9.1",
     "next": "13.1.6",
     "next-auth": "^4.22.1",
@@ -28,6 +29,7 @@
     "react-rating-stars-component": "^2.2.0",
     "react-stars": "^2.2.5",
     "redux-saga": "^1.2.3",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "zustand": "^4.3.8"
   }
 }

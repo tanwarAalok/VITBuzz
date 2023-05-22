@@ -1,4 +1,7 @@
 const connectDatabase = require("../../../utils/db");
+import { ErrorResponse, SuccessResponse } from "@/utils/common";
+import AppError from "@/utils/error/app-error";
+import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
 const Faculty = require("../../../models/FacultyModel");
 
@@ -20,26 +23,53 @@ export default async function handler(req, res) {
     case "POST":
       try {
         const faculty = await Faculty.findOne({ email });
-        if (faculty) return res.status(400).send("Faculty already exists");
+        if (faculty)
+          return new AppError(
+            "Faculty already exists",
+            StatusCodes.BAD_REQUEST
+          );
 
-        const facultyDetails = await Faculty.create(req.body);
-        res.status(201).json({ success: true, faculty: facultyDetails });
+        await Faculty.create(req.body);
+        res.status(StatusCodes.CREATED).json(SuccessResponse);
       } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        ErrorResponse.error.explanation = err.message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
       }
       break;
-    
+
     case "GET":
       try {
-        const data = await Faculty.find({});
-        res.status(400).json({ success: true, faculty: data });
+        const customFilters = {};
+        const sortFilter = {};
+        const aggregateArray = [];
+
+        if (req.query.gender && req.query.gender !== "") {
+          customFilters.gender = req.query.gender;
+        }
+
+        if (req.query.sortType && req.query.sortType !== "") {
+          sortFilter.overallRating = parseInt(req.query.sortType);
+        }
+
+        aggregateArray.push({ $match: customFilters });
+
+        if (Object.keys(sortFilter).length != 0) {
+          aggregateArray.push({ $sort: sortFilter });
+        }
+        
+        const data = await Faculty.aggregate(aggregateArray);
+
+        SuccessResponse.data = data;
+        res.status(StatusCodes.OK).json(SuccessResponse);
       } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        ErrorResponse.error.explanation = err.message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
       }
       break;
 
     default:
-      res.status(400).json({ success: false, message: "Invalid request" });
+      ErrorResponse.error.explanation = "Not a valid request";
+      res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
       break;
   }
 }
