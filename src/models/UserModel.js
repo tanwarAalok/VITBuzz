@@ -6,6 +6,12 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, enum: ["admin", "user"], default: "user" },
   coins: { type: Number, default: 0 },
   image: String,
+  likedReview: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "LikedReview",
+    },
+  ],
 });
 
 mongoose.models = {};

@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from "@/styles/SeachBar.module.css";
 
-const SearchBar = () => {
+const SearchBar = ({searchInput, handleSearch}) => {
   return (
     <div className={styles.searchWrapperParent}>
       <div className={styles.searchWrapper}>
-        <input placeholder="Search by name..." />
+        <input placeholder="Search by name..." value={searchInput} onChange={handleSearch} />
         <svg
           stroke="currentColor"
           fill="currentColor"

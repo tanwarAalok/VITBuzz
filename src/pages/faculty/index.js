@@ -9,12 +9,15 @@ import SearchBar from "@/components/SearchBar";
 import useFetch from "@/utils/hooks/useFetch";
 import { useRouter } from "next/router";
 import Loader from "@/components/Loading";
+import SomethingWentWrong from "@/components/SomethingWentWrong";
 
 const Faculty = () => {
   const router = useRouter();
 
   const [gender, setGender] = useState("");
   const [sortType, setSortType] = useState("");
+  const [searchInput, setsearchInput] = useState("");
+  const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
     if (router) {
@@ -28,7 +31,22 @@ const Faculty = () => {
   );
 
   if (isLoading) return <Loader />;
-  if (serverError) console.log(serverError);
+  if (serverError) return <SomethingWentWrong error={serverError} />;
+
+  const handleSearch = (e) => {
+    const searchWord = e.target.value;
+    setsearchInput(searchWord);
+
+    const newFilter = apiData?.filter((value) => {
+      return value?.name?.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === "") {
+      setSearchData([]);
+    } else {
+      setSearchData(newFilter);
+    }
+  };
 
   return (
     <>
@@ -78,18 +96,26 @@ const Faculty = () => {
         {/* *************************************** */}
 
         <div className={styles.f_right}>
-          <SearchBar />
+          <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
 
           {/* *************************************** */}
 
           <div className={styles.f_right_bottom}>
-            {isLoading ? (
-              <h4>Loading...</h4>
-            ) : (
-              apiData?.map((prof) => (
-                <FacultyCard key={prof.email} data={prof} isFrontPage={false} />
-              ))
-            )}
+            {searchData.length > 0
+              ? searchData?.map((prof) => (
+                  <FacultyCard
+                    key={prof.email}
+                    data={prof}
+                    isFrontPage={false}
+                  />
+                ))
+              : apiData?.map((prof) => (
+                  <FacultyCard
+                    key={prof.email}
+                    data={prof}
+                    isFrontPage={false}
+                  />
+                ))}
           </div>
         </div>
       </div>

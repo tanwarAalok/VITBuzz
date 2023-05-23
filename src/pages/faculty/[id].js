@@ -1,42 +1,34 @@
-import Navbar from '@/components/Navbar';
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import Navbar from "@/components/Navbar";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
 import styles from "@/styles/FacultyDetailPage.module.css";
-import Image from 'next/image';
-import RatingModal from '@/components/RatingModal';
-import Footer from '@/components/Footer';
-import ReviewCard from '@/components/ReviewCard';
-import RatingGraphs from '@/components/RatingGraphs';
+import Image from "next/image";
+import RatingModal from "@/components/RatingModal";
+import Footer from "@/components/Footer";
+import ReviewCard from "@/components/ReviewCard";
+import RatingGraphs from "@/components/RatingGraphs";
 import { useSession, signIn } from "next-auth/react";
-
+import Loader from "@/components/Loading";
+import useFetch from "@/utils/hooks/useFetch";
+import SomethingWentWrong from "@/components/SomethingWentWrong";
 
 const FacultyDetails = () => {
   const { data: session } = useSession();
   const { query } = useRouter();
-  const [data, setData] = useState(null);
-  
-  const [isLoading, setLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-    useEffect(() => {
-      setLoading(true);
-      if (query !== undefined) {
-        fetch(`/api/faculty/${query.id}`)
-          .then((res) => res.json())
-          .then((d) => {
-            setData(d.data);
-            setLoading(false);
-          });
-      }
-      else setLoading(false);
-    }, [query]);
+  const {
+    isLoading,
+    apiData: data,
+    serverError,
+    setUpdate
+  } = useFetch(`/api/faculty/${query.id}`);
+  if (isLoading) return <Loader />;
+  if (serverError) return <SomethingWentWrong error={serverError} />;
 
-  if (isLoading) return <h1>Loading..</h1>;
-  if (!data) return <p>No data found</p>
-  
   return (
     <>
       <Navbar />
@@ -53,7 +45,11 @@ const FacultyDetails = () => {
                 Rate Teacher
               </div>
             )}
-            <RatingModal show={open} handleClose={handleClose} />
+            <RatingModal
+              show={open}
+              handleClose={handleClose}
+              setUpdate={setUpdate}
+            />
           </div>
           <div className={styles.contentDiv}>
             <h1>{data?.name}</h1>
@@ -63,7 +59,7 @@ const FacultyDetails = () => {
           </div>
         </div>
 
-        {data.reviews.length > 0 ? (
+        {data?.reviews?.length > 0 ? (
           <>
             <div className={styles.sec2}>
               <RatingGraphs styles={styles} data={data} />
@@ -72,7 +68,12 @@ const FacultyDetails = () => {
             <div className={styles.sec3}>
               <h3>Reviews</h3>
               {data?.reviews?.map((review) => (
-                <ReviewCard key={review._id} review={review} styles={styles} />
+                <ReviewCard
+                  key={review._id}
+                  review={review}
+                  styles={styles}
+                  setUpdate={setUpdate}
+                />
               ))}
             </div>
           </>
@@ -83,6 +84,6 @@ const FacultyDetails = () => {
       <Footer />
     </>
   );
-}
+};
 
-export default FacultyDetails
+export default FacultyDetails;

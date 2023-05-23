@@ -1,5 +1,7 @@
 const connectDatabase = require("../../utils/db");
 import { Faculty, Review, User } from "@/models";
+import { ErrorResponse, SuccessResponse } from "@/utils/common";
+import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
 
 export default async function handler(req, res) {
@@ -69,7 +71,7 @@ export default async function handler(req, res) {
         const newReview = new Review(body);
 
         const userEmail = userData.email;
-        let user = await User.findOne({ userEmail });
+        let user = await User.findOne({ email: userEmail });
         if (!user) {
           user = await User.create(userData);
         }
@@ -80,29 +82,32 @@ export default async function handler(req, res) {
         await newReview.save();
         await faculty.save();
 
-        res
-          .status(201)
-          .json({ success: true, data: "Review created successfully" });
+        res.status(StatusCodes.CREATED).json(SuccessResponse);
       } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        ErrorResponse.error.explanation = err.message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
       }
       break;
-    case "PUT":
+    case "GET":
       try {
-        await Review.findByIdAndUpdate(req.body.id, req.body);
-        res
-          .status(400)
-          .json({
-            success: true,
-            message: "Review updated successfully !",
-          });
+        const faculty = await Faculty.findById(req.query.id).populate({
+          path: "reviews",
+          populate: {
+            path: "user",
+          },
+        });
+
+        SuccessResponse.data = faculty.reviews;
+        res.status(StatusCodes.OK).json(SuccessResponse);
       } catch (err) {
-        res.status(400).json({ success: false, error: err.message });
+        ErrorResponse.error.explanation = err.message;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
       }
       break;
 
     default:
-      res.status(400).json({ success: false, message: "Invalid request" });
+      ErrorResponse.error.explanation = "Not a valid request";
+      res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse);
       break;
   }
 }
