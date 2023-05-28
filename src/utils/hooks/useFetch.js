@@ -2,7 +2,7 @@ import axios from "axios";
 const { useEffect } = require("react");
 const { useState } = require("react");
 
-const useFetch = (url) => {
+const useFetch = (url, check = true) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiData, setApiData] = useState(null);
   const [serverError, setServerError] = useState(null);
@@ -23,7 +23,10 @@ const useFetch = (url) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchData();
+    if (check) {
+      console.log("check: ", check);
+      fetchData();
+    }
   }, [url]);
 
   useEffect(() => {

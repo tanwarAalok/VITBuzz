@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/FacultyDetailPage.module.css";
 import Image from "next/image";
 import RatingModal from "@/components/RatingModal";
@@ -25,9 +25,10 @@ const FacultyDetails = () => {
     apiData: data,
     serverError,
     setUpdate
-  } = useFetch(`/api/faculty/${query.id}`);
+  } = useFetch(`/api/faculty/${query.id}`, query.id ? true : false);
   if (isLoading) return <Loader />;
   if (serverError) return <SomethingWentWrong error={serverError} />;
+
 
   return (
     <>
