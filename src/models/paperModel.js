@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const PaperSchema = new mongoose.Schema({
     courseCode: { type: String, required: true },
-    faculty: { type: String, required: true },
+    courseTitle: {type: String, required: true},
+    facultyName: { type: String, required: true },
     paperType: { type: String, required: true },
     link: { type: String, required: true }
 });

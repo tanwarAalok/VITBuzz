@@ -1,4 +1,6 @@
 const connectDatabase = require("../../utils/db");
+import { SuccessResponse } from "@/utils/common";
+import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
 const Club = require("../../models/ClubModel");
 
@@ -17,8 +19,6 @@ export default async function handler(req, res) {
     switch (req.method) {
       case "POST":
         try {
-        //   const club = await Club.findOne({ email });
-        //   if (faculty) return res.status(400).send("Faculty already exists");
 
           const clubDetails = await Club.create(req.body);
           res.status(201).json({ success: true, club: clubDetails });
@@ -29,7 +29,8 @@ export default async function handler(req, res) {
       case "GET":
         try {
           const data = await Club.find({});
-          res.status(400).json({ success: true, club: data });
+          SuccessResponse.data = data;
+          res.status(StatusCodes.OK).json(SuccessResponse);
         } catch (err) {
           res.status(400).json({ success: false, error: err.message });
         }

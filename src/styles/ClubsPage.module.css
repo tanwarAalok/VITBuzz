@@ -42,19 +42,20 @@
     cursor: pointer;
 }
 
+/******************** Club CARd ************************/
+
 .clubCardWrapper{
     margin: 50px 10vw;
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
-    justify-content: space-between;
+    justify-content: space-around;
 
 }
 
 .clubcard{
     height: 400px;
-    flex-basis: 350px;
-    /* flex-grow: 1; */
+    width: 350px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -62,42 +63,46 @@
 
 }
 
-.clubcard > img{
-    height: 80%;
+.clubcard hr{
+    margin: 8px 0;
 }
+
+.clubcard p, .clubcard h4{
+    margin: 0;
+}
+
+.clubcard > img{
+    height: 75%;
+}
+
+.bottomDiv{
+    height: 25%;
+    padding: 10px 7%;
+    display: flex;
+    flex-direction: column;
+}
+
 .clubContent{
-    margin-left: 7%;
-    height: 10%;
-    width: 86%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .clubContent > p{
-    margin-top: 10px;
     background-color: rgb(8, 8, 179);
     color: white;
     padding: 3px 10px;
     border-radius: 8px;
 }
 
-
 .clubLinks{
-    height: 10%;
-    width: 86%;
-    margin-left: 7%;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 5px;
 }
 
 .link{
     cursor: pointer;
-}
-
-.clubcard > hr{
-    width: 86%;
-    margin: 5px 7%;
 }
