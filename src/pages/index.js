@@ -8,13 +8,20 @@ import SomethingWentWrong from "@/components/SomethingWentWrong";
 
 export default function Home() {
   const { isLoading, apiData, serverError } = useFetch("/api/faculty/top");
-  if (isLoading) return <Loader />;
   if (serverError) return <SomethingWentWrong error={serverError} />;
 
   return (
     <>
       <Navbar />
-      <LandingPage styles={styles} topFaculty={apiData} isLoading={isLoading} />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <LandingPage
+          styles={styles}
+          topFaculty={apiData}
+          isLoading={isLoading}
+        />
+      )}
       <Footer />
     </>
   );

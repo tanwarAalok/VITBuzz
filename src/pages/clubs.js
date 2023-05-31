@@ -14,7 +14,6 @@ export default function ClubPage() {
 
   const { isLoading, apiData, serverError } = useFetch("/api/club");
 
-  if (isLoading) return <Loader />;
   if (serverError) return <SomethingWentWrong error={serverError} />;
 
   const handleSearch = (e) => {
@@ -35,21 +34,25 @@ export default function ClubPage() {
   return (
     <>
       <Navbar />
-      <div className={styles.clubPage}>
-        <div className={styles.options}>
-          <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
-        </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.clubPage}>
+          <div className={styles.options}>
+            <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
+          </div>
 
-        <div className={styles.clubCardWrapper}>
-          {searchData.length > 0
-            ? searchData?.map((club) => (
-                <ClubCard key={club._id} styles={styles} data={club} />
-              ))
-            : apiData?.map((club) => (
-                <ClubCard key={club._id} styles={styles} data={club} />
-              ))}
+          <div className={styles.clubCardWrapper}>
+            {searchData.length > 0
+              ? searchData?.map((club) => (
+                  <ClubCard key={club._id} styles={styles} data={club} />
+                ))
+              : apiData?.map((club) => (
+                  <ClubCard key={club._id} styles={styles} data={club} />
+                ))}
+          </div>
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );

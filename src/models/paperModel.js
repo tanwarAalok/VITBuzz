@@ -5,7 +5,8 @@ const PaperSchema = new mongoose.Schema({
     courseTitle: {type: String, required: true},
     facultyName: { type: String, required: true },
     paperType: { type: String, required: true },
-    link: { type: String, required: true }
+    link: { type: String, required: true },
+    approved: {type: Boolean, default: false}
 });
 
 mongoose.models = {};

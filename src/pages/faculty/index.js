@@ -30,7 +30,6 @@ const Faculty = () => {
     `/api/faculty?gender=${gender}&sortType=${sortType}`
   );
 
-  if (isLoading) return <Loader />;
   if (serverError) return <SomethingWentWrong error={serverError} />;
 
   const handleSearch = (e) => {
@@ -51,74 +50,78 @@ const Faculty = () => {
   return (
     <>
       <Navbar />
-      <div className={styles.facultyPage}>
-        <div className={styles.f_left}>
-          <div className={styles.filterBtn}>
-            Filters
-            <Image src={filterImg} alt="filterIMg" />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.facultyPage}>
+          <div className={styles.f_left}>
+            <div className={styles.filterBtn}>
+              Filters
+              <Image src={filterImg} alt="filterIMg" />
+            </div>
+
+            <div className={styles.filters}>
+              <select
+                value={gender}
+                onChange={(e) => {
+                  const query = { ...router.query, gender: e.target.value };
+                  if (e.target.value == "") {
+                    delete query.gender;
+                  }
+                  router.replace({ query: query });
+                  setGender(e.target.value);
+                }}
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+
+              <select
+                value={sortType}
+                onChange={(e) => {
+                  const query = { ...router.query, sortType: e.target.value };
+                  if (e.target.value == "") {
+                    delete query.sortType;
+                  }
+                  router.replace({ query: query });
+                  setSortType(e.target.value);
+                }}
+              >
+                <option value="">Sort by Rating</option>
+                <option value={-1}>Highest to Lowest</option>
+                <option value={1}>Lowest to highest</option>
+              </select>
+            </div>
           </div>
-
-          <div className={styles.filters}>
-            <select
-              value={gender}
-              onChange={(e) => {
-                const query = { ...router.query, gender: e.target.value };
-                if (e.target.value == "") {
-                  delete query.gender;
-                }
-                router.replace({ query: query });
-                setGender(e.target.value);
-              }}
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-
-            <select
-              value={sortType}
-              onChange={(e) => {
-                const query = { ...router.query, sortType: e.target.value };
-                if (e.target.value == "") {
-                  delete query.sortType;
-                }
-                router.replace({ query: query });
-                setSortType(e.target.value);
-              }}
-            >
-              <option value="">Sort by Rating</option>
-              <option value={-1}>Highest to Lowest</option>
-              <option value={1}>Lowest to highest</option>
-            </select>
-          </div>
-        </div>
-
-        {/* *************************************** */}
-
-        <div className={styles.f_right}>
-          <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
 
           {/* *************************************** */}
 
-          <div className={styles.f_right_bottom}>
-            {searchData.length > 0
-              ? searchData?.map((prof) => (
-                  <FacultyCard
-                    key={prof.email}
-                    data={prof}
-                    isFrontPage={false}
-                  />
-                ))
-              : apiData?.map((prof) => (
-                  <FacultyCard
-                    key={prof.email}
-                    data={prof}
-                    isFrontPage={false}
-                  />
-                ))}
+          <div className={styles.f_right}>
+            <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
+
+            {/* *************************************** */}
+
+            <div className={styles.f_right_bottom}>
+              {searchData.length > 0
+                ? searchData?.map((prof) => (
+                    <FacultyCard
+                      key={prof.email}
+                      data={prof}
+                      isFrontPage={false}
+                    />
+                  ))
+                : apiData?.map((prof) => (
+                    <FacultyCard
+                      key={prof.email}
+                      data={prof}
+                      isFrontPage={false}
+                    />
+                  ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );

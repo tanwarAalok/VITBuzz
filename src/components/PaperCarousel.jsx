@@ -1,17 +1,17 @@
-import React from 'react'
-import { Carousel } from 'react-bootstrap';
-import { useState } from 'react';
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import { useState } from "react";
 
-const PaperCarousel = ({styles, apiData}) => {
-    const [index, setIndex] = useState(0);
+const PaperCarousel = ({ styles, apiData }) => {
+  const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
-      setIndex(selectedIndex);
-    };
-
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   return (
     <Carousel
+      autoPlay={false}
       variant="dark"
       className={styles.result}
       activeIndex={index}
@@ -30,6 +30,6 @@ const PaperCarousel = ({styles, apiData}) => {
       ))}
     </Carousel>
   );
-}
+};
 
-export default PaperCarousel
+export default PaperCarousel;

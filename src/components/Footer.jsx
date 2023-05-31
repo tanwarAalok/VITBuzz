@@ -16,10 +16,10 @@ const Footer = () => {
       <div className={styles.sectionTwo}>
         <h4>University Address </h4>
         <div>
-          <Link href="placements">Placements</Link>
-          <Link href="papers">Papers</Link>
           <Link href="faculty">Faculty</Link>
+          <Link href="papers">Papers</Link>
           <Link href="clubs">Clubs</Link>
+          <Link href="mentorship">Mentors</Link>
         </div>
       </div>
       <div className={styles.sectionThree}>

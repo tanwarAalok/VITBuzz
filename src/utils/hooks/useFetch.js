@@ -24,7 +24,6 @@ const useFetch = (url, check = true) => {
   useEffect(() => {
     setIsLoading(true);
     if (check) {
-      console.log("check: ", check);
       fetchData();
     }
   }, [url]);

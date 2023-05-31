@@ -1,23 +1,17 @@
-import ClubTable from "@/components/ClubTable";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "@/styles/AdminHome.module.css";
 import AdminDrawer from "@/components/AdminDrawer";
 import { useRouter } from "next/router";
+import SomethingWentWrong from "@/components/SomethingWentWrong";
+import useFetch from "@/utils/hooks/useFetch";
+import PaperTable from "@/components/PaperTable";
+import Loader from "@/components/Loading";
 
 const PaperManage = () => {
   const router = useRouter();
-   const [allPapers, setAllPapers] = useState(null);
-   const [isLoading, setLoading] = useState(false);
 
-   useEffect(() => {
-     setLoading(true);
-     fetch("/api/paper")
-       .then((res) => res.json())
-       .then((data) => {
-         setAllPapers(data.papers);
-         setLoading(false);
-       });
-   }, []);
+  const { isLoading, apiData, serverError } = useFetch("/api/paper");
+  if (serverError) return <SomethingWentWrong error={serverError} />;
 
   return (
     <>
@@ -30,7 +24,7 @@ const PaperManage = () => {
               Create new +{" "}
             </button>
           </div>
-          {isLoading ? <h3>Loading...</h3> : <ClubTable data={allPapers} />}
+          {isLoading ? <Loader/> : <PaperTable data={apiData} />}
         </div>
       </div>
     </>

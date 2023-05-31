@@ -26,62 +26,65 @@ const FacultyDetails = () => {
     serverError,
     setUpdate
   } = useFetch(`/api/faculty/${query.id}`, query.id ? true : false);
-  if (isLoading) return <Loader />;
   if (serverError) return <SomethingWentWrong error={serverError} />;
 
 
   return (
     <>
       <Navbar />
-      <div className={styles.mainPage}>
-        <div className={styles.sec1}>
-          <div className={styles.imgCont}>
-            <Image src={data?.image} alt="image" width="350" height="400" />
-            {session ? (
-              <div className={styles.ratingBtn} onClick={handleOpen}>
-                Rate Teacher
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={styles.mainPage}>
+          <div className={styles.sec1}>
+            <div className={styles.imgCont}>
+              <Image src={data?.image} alt="image" width="350" height="400" />
+              {session ? (
+                <div className={styles.ratingBtn} onClick={handleOpen}>
+                  Rate Teacher
+                </div>
+              ) : (
+                <div className={styles.ratingBtn} onClick={() => signIn()}>
+                  Rate Teacher
+                </div>
+              )}
+              <RatingModal
+                show={open}
+                handleClose={handleClose}
+                setUpdate={setUpdate}
+              />
+            </div>
+            <div className={styles.contentDiv}>
+              <h1>{data?.name}</h1>
+              <div>
+                <p>{data?.description}</p>
               </div>
-            ) : (
-              <div className={styles.ratingBtn} onClick={() => signIn()}>
-                Rate Teacher
-              </div>
-            )}
-            <RatingModal
-              show={open}
-              handleClose={handleClose}
-              setUpdate={setUpdate}
-            />
-          </div>
-          <div className={styles.contentDiv}>
-            <h1>{data?.name}</h1>
-            <div>
-              <p>{data?.description}</p>
             </div>
           </div>
+
+          {data?.reviews?.length > 0 ? (
+            <>
+              <div className={styles.sec2}>
+                <RatingGraphs styles={styles} data={data} />
+              </div>
+
+              <div className={styles.sec3}>
+                <h3>Reviews</h3>
+                {data?.reviews?.map((review) => (
+                  <ReviewCard
+                    key={review._id}
+                    review={review}
+                    styles={styles}
+                    setUpdate={setUpdate}
+                  />
+                ))}
+              </div>
+            </>
+          ) : (
+            ""
+          )}
         </div>
-
-        {data?.reviews?.length > 0 ? (
-          <>
-            <div className={styles.sec2}>
-              <RatingGraphs styles={styles} data={data} />
-            </div>
-
-            <div className={styles.sec3}>
-              <h3>Reviews</h3>
-              {data?.reviews?.map((review) => (
-                <ReviewCard
-                  key={review._id}
-                  review={review}
-                  styles={styles}
-                  setUpdate={setUpdate}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          ""
-        )}
-      </div>
+      )}
       <Footer />
     </>
   );

@@ -1,23 +1,18 @@
 import ClubTable from '@/components/ClubTable'
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from "@/styles/AdminHome.module.css";
 import AdminDrawer from '@/components/AdminDrawer';
 import { useRouter } from 'next/router';
+import SomethingWentWrong from '@/components/SomethingWentWrong';
+import useFetch from '@/utils/hooks/useFetch';
+import Loader from '@/components/Loading';
 
 const ClubManage = () => {
   const router = useRouter();
-  const [allClubs, setAllClubs] = useState(null);
-  const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/club")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllClubs(data.club);
-        setLoading(false);
-      });
-  }, []);
+  const { isLoading, apiData, serverError } = useFetch("/api/club"); 
+  if (serverError) return <SomethingWentWrong error={serverError} />;
+  
   return (
     <>
       <div className={styles.main}>
@@ -29,7 +24,7 @@ const ClubManage = () => {
               Create new +{" "}
             </button>
           </div>
-          {isLoading ? <h3>Loading...</h3> : <ClubTable data={allClubs} />}
+          {isLoading ? <Loader/> : <ClubTable data={apiData} />}
         </div>
       </div>
     </>

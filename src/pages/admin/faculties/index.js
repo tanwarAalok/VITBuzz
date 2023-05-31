@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "@/styles/AdminHome.module.css";
 import AdminDrawer from "@/components/AdminDrawer";
 import FacultyTable from "@/components/FacultyTable";
 import { useRouter } from "next/router";
+import SomethingWentWrong from "@/components/SomethingWentWrong";
+import useFetch from "@/utils/hooks/useFetch";
+import Loader from "@/components/Loading";
 
 const FacultyManage = () => {
-    const router = useRouter();
-  const [allFaculty, setAllfaculty] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/faculty")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllfaculty(data.faculty);
-        setLoading(false);
-      });
-  }, []);
+  const router = useRouter();
+  
+  const { isLoading, apiData, serverError } = useFetch("/api/faculty");
+  if (serverError) return <SomethingWentWrong error={serverError} />;
 
 
   return (
@@ -27,9 +21,11 @@ const FacultyManage = () => {
         <div className={styles.contentWrapper}>
           <div className={styles.rightTopHeader}>
             <h2>All Faculty</h2>
-            <button onClick={() => router.push("/admin/faculties/newFaculty") } >Create new + </button>
+            <button onClick={() => router.push("/admin/faculties/newFaculty")}>
+              Create new +{" "}
+            </button>
           </div>
-          {isLoading ? <h3>Loading...</h3> : <FacultyTable data={allFaculty} />}
+          {isLoading ? <Loader/> : <FacultyTable data={apiData} />}
         </div>
       </div>
     </>
