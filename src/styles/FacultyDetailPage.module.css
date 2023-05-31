@@ -114,7 +114,6 @@
 .sec3{
     margin-top: 50px;
     width: 100%;
-    height: 300px; 
 }
 
 .sec3 > h3{
@@ -128,8 +127,7 @@
 
 .reviewCardParent{
     width: 100%;
-    height: 500px;
-    margin-top: 50px;
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;

@@ -70,14 +70,16 @@ const FacultyDetails = () => {
 
               <div className={styles.sec3}>
                 <h3>Reviews</h3>
-                {data?.reviews?.map((review) => (
-                  <ReviewCard
-                    key={review._id}
-                    review={review}
-                    styles={styles}
-                    setUpdate={setUpdate}
-                  />
-                ))}
+                <div className={styles.reviewCardParent}>
+                  {data?.reviews?.map((review) => (
+                    <ReviewCard
+                      key={review._id}
+                      review={review}
+                      styles={styles}
+                      setUpdate={setUpdate}
+                    />
+                  ))}
+                </div>
               </div>
             </>
           ) : (
