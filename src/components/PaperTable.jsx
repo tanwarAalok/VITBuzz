@@ -1,7 +1,27 @@
 import { DeleteIcon, EditIcon } from "@/utils/Icons";
+import axios from "axios";
+import { useState } from "react";
+import { Spinner } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 
-function PaperTable({ data }) {
+function PaperTable({ data, setUpdate }) {
+  const [loading, setLoading] = useState(null);
+
+  const handleStatus = async (paperId, status) => {
+    setLoading(paperId);
+    await axios
+      .patch(`/api/paper?id=${paperId}`, { approved: !status })
+      .then(function (res) {
+        setLoading(null);
+        setUpdate(true);
+      })
+      .catch(function (error) {
+        alert("Something went wrong");
+        console.log(error);
+        setLoading(null);
+      });
+  };
+
   return (
     <Table bordered hover>
       <thead>
@@ -32,11 +52,25 @@ function PaperTable({ data }) {
             </td>
             <td>
               <button
+                disabled={loading}
+                onClick={() => handleStatus(paper._id, paper.approved)}
                 className={`btn ${
                   paper.approved ? "btn-success" : "btn-primary"
                 }`}
               >
-                {paper.approved ? "Approved" : "Pending"}
+                {loading === paper._id ? (
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                ) : paper.approved ? (
+                  "Approved"
+                ) : (
+                  "Pending"
+                )}
               </button>
             </td>
             <td>

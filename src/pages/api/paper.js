@@ -1,5 +1,5 @@
 const connectDatabase = require("../../utils/db");
-import { SuccessResponse } from "@/utils/common";
+import { ErrorResponse, SuccessResponse } from "@/utils/common";
 import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
 const { Paper } = require("../../models");
@@ -17,6 +17,21 @@ export default async function handler(req, res) {
   // *********************************************************************
 
   switch (req.method) {
+    case "PATCH":
+      try {
+        console.log(req.query.id, req.body);
+        const updatedPaper = await Paper.findByIdAndUpdate(req.query.id, req.body, {
+          new: true,
+          runValidators: true,
+          useFindAndModify: false,
+        });
+        SuccessResponse.data = updatedPaper;
+        SuccessResponse.message = "Successfully Updated paper";
+        res.status(StatusCodes.ACCEPTED).json(SuccessResponse);
+      } catch (err) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+      }
+      break;
     case "POST":
       try {
         const newPaper = await Paper.create(req.body);

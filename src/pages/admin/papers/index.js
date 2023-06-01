@@ -10,7 +10,7 @@ import Loader from "@/components/Loading";
 const PaperManage = () => {
   const router = useRouter();
 
-  const { isLoading, apiData, serverError } = useFetch("/api/paper");
+  const { isLoading, apiData, serverError, setUpdate } = useFetch("/api/paper");
   if (serverError) return <SomethingWentWrong error={serverError} />;
 
   return (
@@ -24,7 +24,13 @@ const PaperManage = () => {
               Create new +{" "}
             </button>
           </div>
-          {isLoading ? <Loader/> : <PaperTable data={apiData} />}
+          <div className={styles.tableWrapper}>
+            {isLoading ? (
+              <Loader />
+            ) : (
+              <PaperTable data={apiData} setUpdate={setUpdate} />
+            )}
+          </div>
         </div>
       </div>
     </>

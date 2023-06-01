@@ -47,6 +47,7 @@
 
 .contentWrapper{
     width: 82%;
+    height: 100vh;
     background-color: rgb(241, 239, 239);
     padding: 30px 50px;
 }
@@ -64,4 +65,10 @@
     padding: 6px 10px;
     border: 0;
     border-radius: 5px;
+}
+
+.tableWrapper{
+    width: 100%;
+    height: calc(100vh - 130px);
+    overflow-y: auto;
 }

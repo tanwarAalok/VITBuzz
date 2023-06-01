@@ -43,6 +43,7 @@ const Paper = () => {
                 <option value={""}>Select Faculty..</option>
                 <option value={"Venkat Prasad"}>Venkat Prasad</option>
                 <option value={"Baseera A"}>Baseera A</option>
+                <option value={"Dr. S.Poonkuntran"}>Dr. S.Poonkuntran</option>
               </select>
 
               <select
@@ -57,6 +58,9 @@ const Paper = () => {
                 </option>
                 <option value={"Competitive Programming"}>
                   Competitive Programming
+                </option>
+                <option value={"Data Structures and Algorithms"}>
+                  Data Structures and Algorithms
                 </option>
               </select>
 
