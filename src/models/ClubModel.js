@@ -6,7 +6,6 @@ const ClubSchema = new mongoose.Schema({
     clubType: { type: String, required: true },
     linkedIn: String,
     instagram: String,
-    website: String,
 });
 
 mongoose.models = {};

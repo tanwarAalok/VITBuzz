@@ -114,7 +114,7 @@ function PaperForm() {
       {/* ******************************************************************************* */}
 
       <Form.Group className="mb-3 flex-grow-1" controlId="formBasicName">
-        <Form.Label>Paper type</Form.Label>
+      <Form.Label>Paper type</Form.Label>
         <Form.Select name="paperType" onChange={updateValues}>
           <option>Select Type</option>
           <option value="Mid Term">Mid-Term</option>

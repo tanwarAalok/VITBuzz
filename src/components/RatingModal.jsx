@@ -7,7 +7,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 
 
-const RatingModal = ({ show, handleClose, setUpdate }) => {
+const RatingModal = ({ show, handleClose, trigger, setTrigger }) => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [behaviourRating, setBehaviourRating] = useState(0);
@@ -19,22 +19,25 @@ const RatingModal = ({ show, handleClose, setUpdate }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    const avgRating = (paperRating + behaviourRating + teachingRating) / 3;
+
     const body = {
+      avgRating,
       paperRating,
       behaviourRating,
       teachingRating,
       userData: session.user,
-      facultyId: query.id,
       comment,
     };
 
     setLoading(true);
     await axios
-      .post("/api/review", body)
+      .post("/api/review", body, { params: { facultyId: query.id } })
       .then(function (response) {
         alert(response.data.message);
         setLoading(false);
-        setUpdate(true);
+        setTrigger(!trigger);
+        handleClose();
       })
       .catch(function (error) {
         alert(error.response.data.error.explanation);

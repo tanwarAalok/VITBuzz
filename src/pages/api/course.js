@@ -1,7 +1,8 @@
-const connectDatabase = require("../../../utils/db");
-import { FacultyController } from "@/controllers";
-import { StatusCodes } from "http-status-codes";
+const connectDatabase = require("../../utils/db");
 import NextCors from "nextjs-cors";
+import { CourseController } from '../../controllers';
+
+connectDatabase();
 
 export default async function handler(req, res) {
   await NextCors(req, res, {
@@ -11,19 +12,18 @@ export default async function handler(req, res) {
     optionsSuccessStatus: 200,
   });
 
-  connectDatabase();
-
   // *********************************************************************
 
   switch (req.method) {
+    case "POST":
+          await CourseController.createCourse(req, res);
+      break;
     case "GET":
-      await FacultyController.getTopFaculty(req, res);
+          await CourseController.getAllCourses(req, res);
       break;
 
     default:
-      res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: "Not a valid request" });
+      res.status(400).json({ message: "Invalid request" });
       break;
   }
 }

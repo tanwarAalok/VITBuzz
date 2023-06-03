@@ -1,5 +1,5 @@
 const connectDatabase = require("../../../utils/db");
-import { FacultyController } from "@/controllers";
+import { ReviewController } from "@/controllers";
 import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
 
@@ -15,15 +15,14 @@ export default async function handler(req, res) {
 
   // *********************************************************************
 
+
   switch (req.method) {
-    case "GET":
-      await FacultyController.getTopFaculty(req, res);
+    case "POST":
+      await ReviewController.voteReview(req, res);
       break;
 
     default:
-      res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: "Not a valid request" });
+      res.status(StatusCodes.BAD_REQUEST).json({message: "Invalid Request"});
       break;
   }
 }

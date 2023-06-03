@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const ReviewSchema = new Schema({
   comment: String,
-  likes: {type: Number, default: 0},
+  upvotes: { type: [String], default: [] },
+  downvotes: { type: [String], default: [] },
   ratings: {
     avgRating: { type: String, default: 0 },
     paperRating: { type: String, default: 0 },

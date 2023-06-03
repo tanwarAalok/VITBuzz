@@ -11,21 +11,6 @@ const BarColorWidth = (value) => {
 };
 
 const RatingGraphs = ({ styles, data }) => {
-    // let avgRating = 0, paperRating = 0, behaviourRating = 0, teachingRating = 0;
-
-    // const totalReviews = reviews.length;
-
-    // reviews.map((review) => {
-    //     avgRating += review.ratings.avgRating;
-    //     paperRating += review.ratings.paperRating;
-    //     behaviourRating += review.ratings.behaviourRating;
-    //     teachingRating += review.ratings.teachingRating;
-    // })
-
-    // avgRating = avgRating / totalReviews;
-    // paperRating = paperRating / totalReviews;
-    // behaviourRating = behaviourRating / totalReviews;
-    // teachingRating = teachingRating / totalReviews;
 
   return (
     <Fragment>

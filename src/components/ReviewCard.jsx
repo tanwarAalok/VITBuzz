@@ -40,7 +40,7 @@ const formattedName = (nameString) => {
   return name.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
 };
 
-const ReviewCard = ({ review, styles, setUpdate }) => {
+const ReviewCard = ({ review, styles, trigger, setTrigger }) => {
   const { data: session } = useSession();
   const [liked, setLiked] = useState(null);
   const [user, setUser] = useState(null);
@@ -56,11 +56,12 @@ const ReviewCard = ({ review, styles, setUpdate }) => {
       });
   };
 
+
   useEffect(() => {
     if (session) {
       fetchUser();
     }
-  }, [session]);
+  }, [session, trigger]);
 
 
   useEffect(() => {
@@ -77,25 +78,24 @@ const ReviewCard = ({ review, styles, setUpdate }) => {
   const likeReview = async (like) => {
     if (!user) {
       console.log("User not found");
+      signIn();
       return;
-      // signIn();
     }
 
     if (liked == like) return;
 
     const body = {
       reviewId: review._id,
-      userId: user?._id,
+      userData: user,
       liked: like,
     };
     await axios
-      .post("/api/like", body)
+      .post("/api/review/vote", body)
       .then(function (response) {
-        console.log(response?.data?.message);
-        setUpdate(true);
+        setTrigger(!trigger);
       })
       .catch(function (error) {
-        console.log(error?.response?.data?.error?.explanation);
+        console.log(error.message);
       });
   };
 
@@ -107,7 +107,7 @@ const ReviewCard = ({ review, styles, setUpdate }) => {
             color={liked === true ? "green" : "white"}
             onClick={() => likeReview(true)}
           />
-          <p>{review?.likes || 0}</p>
+          <p>{review.upvotes.length - review.downvotes.length}</p>
           <AiOutlineArrowDown
             color={liked === false ? "red" : "white"}
             onClick={() => likeReview(false)}

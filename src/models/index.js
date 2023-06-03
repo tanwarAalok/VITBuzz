@@ -4,5 +4,6 @@ module.exports = {
     Paper: require("../models/paperModel"),
     Review: require("../models/ReviewModel"),
     User: require("../models/UserModel"),
-    LikedReview: require("../models/LikedReview")
+    LikedReview: require("../models/LikedReview"),
+    Course: require('./CourseModel')
 }
