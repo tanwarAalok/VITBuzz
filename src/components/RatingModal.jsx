@@ -32,7 +32,7 @@ const RatingModal = ({ show, handleClose, trigger, setTrigger }) => {
     };
 
     setLoading(true);
-    await postNewRating(body, query.id, setTrigger, trigger);
+    await postNewRating(body, query.id, setTrigger, trigger, handleClose);
     setLoading(false);
   };
 

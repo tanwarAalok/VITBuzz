@@ -11,7 +11,7 @@ const voteReviewRequest = async (body, setTrigger, trigger) => {
       });
 }
 
-const postNewRating = async (body, facultyId, setTrigger, trigger) => {
+const postNewRating = async (body, facultyId, setTrigger, trigger, handleClose) => {
   await axios
     .post("/api/review", body, { params: { facultyId: facultyId } })
     .then(function (response) {
