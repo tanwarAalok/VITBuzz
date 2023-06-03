@@ -5,6 +5,7 @@ import ReactStars from "react-stars";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import { postNewRating } from "@/utils/helper/postHelper";
 
 
 const RatingModal = ({ show, handleClose, trigger, setTrigger }) => {
@@ -31,19 +32,8 @@ const RatingModal = ({ show, handleClose, trigger, setTrigger }) => {
     };
 
     setLoading(true);
-    await axios
-      .post("/api/review", body, { params: { facultyId: query.id } })
-      .then(function (response) {
-        alert(response.data.message);
-        setLoading(false);
-        setTrigger(!trigger);
-        handleClose();
-      })
-      .catch(function (error) {
-        alert(error.response.data.error.explanation);
-        console.log(error);
-        setLoading(false);
-      });
+    await postNewRating(body, query.id, setTrigger, trigger);
+    setLoading(false);
   };
 
   return (
