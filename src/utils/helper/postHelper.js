@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+const axios = require("axios");
 
 const voteReviewRequest = async (body, setTrigger, trigger) => {
     return await axios

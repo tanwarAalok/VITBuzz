@@ -40,14 +40,13 @@ const FacultyDetails = () => {
   }
   
   useEffect(() => {
-    if (query) {
+    if (query && query.id) {
       fetchReviews();
     }
   }, [query, trigger]);
 
   useEffect(() => {
     if (ratingData && session) {
-      console.log(checkIfAlreadyRated(ratingData.reviews))
       setRated(checkIfAlreadyRated(ratingData.reviews));
     }
   }, [ratingData, session])

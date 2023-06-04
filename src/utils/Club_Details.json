@@ -1,0 +1,38 @@
+[
+    {
+        "name":"Android Club",
+        "clubType":"Tech",
+        "image":"https://yt3.googleusercontent.com/MK2IIQt5QnLEC8hK4lyly3d8cbqPZVNWBNZJnhliLyLb_pEIkRxV5ACQdcbMbasLlSy15CVQbbU=s176-c-k-c0x00ffffff-no-rj",
+        "instagram":"https://www.instagram.com/androidclub.vitb/?igshid=ZDdkNTZiNTM%3D",
+        "linkedIn": "https://www.linkedin.com/company/android-club-vit-bhopal/"
+    },
+
+    {
+        "name":"Microsoft Tech Club",
+        "clubType":"Tech",
+        "image":"https://media.licdn.com/dms/image/C4E0BAQGhwyMjxr8dug/company-logo_200_200/0/1643710419039?e=2147483647&v=beta&t=6MBr21PMvkega7B_iqcbU33Cs29MlQBWIfwJy9xXXsg",
+        "instagram":"https://www.instagram.com/mstc_vitb/",
+        "linkedIn": "https://www.linkedin.com/company/mstc-vit-bhopal/"
+    },
+
+    {
+        "name":"VR and Gaming Club",
+        "clubType":"Tech",
+        "image":"https://d1fdloi71mui9q.cloudfront.net/vDk6RxBFStG01N8EZGvw_7yVEI7Q3b3P462GY",
+        "instagram":"https://www.instagram.com/vrgc_vitb_/?igshid=YWJhMjlhZTc%3D"
+    },
+
+    {
+        "name":"Photography Club",
+        "clubType":"Non-Tech",
+        "image":"https://instagram.fdel1-3.fna.fbcdn.net/v/t51.2885-19/194238421_527590748424503_358638835965291048_n.jpg?stp=dst-jpg_s320x320&_nc_ht=instagram.fdel1-3.fna.fbcdn.net&_nc_cat=111&_nc_ohc=BZj6lAmeNhgAX-TqX02&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfAZv8h9TKJdwFCr0oMSTg4UAzIGIVwPg4a0BB8kpD81UA&oe=6480FD91&_nc_sid=f70a57",
+        "instagram":"https://www.instagram.com/vitbphotography/"
+    },
+
+    {
+        "name":"Bit By Bit Club",
+        "clubType":"Tech",
+        "image":"https://d1fdloi71mui9q.cloudfront.net/bLUMk2foSBmq0CK7ffAD_5Uj4QZyFc6qf18jp",
+        "instagram":"https://www.instagram.com/bitbybit_vitb/"
+    }
+]

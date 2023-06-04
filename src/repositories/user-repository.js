@@ -12,12 +12,6 @@ class UserRepository extends CrudRepository {
     const response = await User.findOne({ email: email }).populate({
       path: "likedReview",
     });
-    if (!response) {
-      throw new AppError(
-        "Not able to find the resource",
-        StatusCodes.NOT_FOUND
-      );
-    }
     return response;
   }
 
