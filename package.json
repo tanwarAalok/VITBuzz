@@ -26,6 +26,7 @@
     "react": "18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "18.2.0",
+    "react-icons": "^4.9.0",
     "react-rating-stars-component": "^2.2.0",
     "react-stars": "^2.2.5",
     "redux-saga": "^1.2.3",

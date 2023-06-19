@@ -1,59 +1,12 @@
-.navbarComponent{
-  background-color: #020381;
-  height: 70px;
-  width: 100vmax;
-  /* position: fixed;
-  z-index: 10; */
-  padding: 0 30px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  color: white
+
+.custom{
+    color: white;
+}
+.custom span{
+    background-image: url('/_next/static/media/hamburger.0ae06b9d.svg') !important;
 }
 
-.navbarComponent a{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.navbarComponent a:hover, .navbarComponent svg:hover{
-    opacity: 0.8;
-}
-
-.linkBox{
-    width: 40%;
-    display: flex;
-    justify-content: space-around;
-}
-
-.logo{
-    height: 60px;
-    width: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 32px;
-    cursor: pointer;
-}
-
-.logo:hover{
-    opacity: 0.8;
-}
-
-.logo p{
-    margin-top: 25px;
-    padding: 0;
-    width: 64%;
-    height: 100%;
-    align-self: center;
-}
-
-.logo img{
-    width: 30%;
-    height: 90%;
-}
-
-.logo span{
-    font-size: 24px;
+.buzz{
+    font-size: 18px;
     font-family: cursive;
 }
-    
