@@ -2,8 +2,8 @@
 .custom{
     color: white;
 }
-.custom span{
-    background-image: url('/_next/static/media/hamburger.0ae06b9d.svg') !important;
+.custom > span{
+    background-image: url('/_next/static/media/hamberger.e62e9a91.png') !important;
 }
 
 .buzz{
