@@ -7,7 +7,8 @@
 }
 
 .searchWrapper{
-    position: relative;  
+    position: relative;
+    width: inherit;
 }
 
 .searchWrapper input{
@@ -16,7 +17,7 @@
     border-radius: 38.5px;
     padding: 15px 60px;
     border: 0;
-    width: 712px;
+    width: inherit;
     font-style: normal;
     font-weight: 400;
     font-size: 13px;

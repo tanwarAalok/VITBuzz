@@ -98,7 +98,9 @@ const Faculty = () => {
           {/* *************************************** */}
 
           <div className={styles.f_right}>
-            <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
+            <div className={styles.searchInput}>
+              <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
+            </div>
 
             {/* *************************************** */}
 

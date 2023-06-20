@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { fetchUser } from '../utils/helper/fetchHelper.js';
 import { formattedName, setLikeStatus } from "@/utils/helper/Computations.js";
 import { voteReviewRequest } from "@/utils/helper/postHelper.js";
-import { ArrowDownIcon, ArrowUpIcon } from "@/utils/Icons.js";
+import {AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike} from "react-icons/ai";
 
 
 
@@ -45,25 +45,21 @@ const ReviewCard = ({ review, styles, trigger, setTrigger }) => {
   };
 
   return (
-    <div className={styles.reviewCardParent}>
       <div className={styles.reviewCard}>
         <div className={styles.likePart}>
-          <ArrowUpIcon
-            color={liked === true ? "green" : "white"}
-            onClick={() => likeReview(true)}
-          />
+          {
+            !liked ? <AiOutlineLike onClick={() => likeReview(true)}/> : <AiFillLike onClick={() => likeReview(true)}/>
+          }
           <p>{review.upvotes.length - review.downvotes.length}</p>
-          <ArrowDownIcon
-            color={liked === false ? "red" : "white"}
-            onClick={() => likeReview(false)}
-          />
+          {
+            liked == null || liked ? <AiOutlineDislike onClick={() => likeReview(false)}/> : <AiFillDislike onClick={() => likeReview(false)}/>
+          }
         </div>
         <div className={styles.reviewPart}>
           <h3>{formattedName(review.user.name)}</h3>
           <p>{review.comment}</p>
         </div>
       </div>
-    </div>
   );
 };
 

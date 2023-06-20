@@ -43,9 +43,12 @@
 .f_right{
     width: 82%;
     height: 100vh;
-    /* overflow-y: scroll; */
 }
 
+.searchInput{
+    width: 70%;
+    margin-left: 15%;
+}
 
 .f_right_bottom{
     width: 100%;
