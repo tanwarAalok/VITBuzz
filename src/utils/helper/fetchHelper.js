@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fetchUser = async (setUser,email) => {
      return await axios
-      .get("/api/user", { params: { email: email } })
+      .get(`/api/user/${email}`)
       .then((res) => {
         setUser(res.data.data);
       })

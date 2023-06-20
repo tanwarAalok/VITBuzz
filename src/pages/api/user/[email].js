@@ -1,4 +1,4 @@
-const connectDatabase = require("../../utils/db");
+const connectDatabase = require("../../../utils/db");
 import { User } from "@/models";
 import { ErrorResponse, SuccessResponse } from "@/utils/common";
 import { StatusCodes } from "http-status-codes";

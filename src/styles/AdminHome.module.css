@@ -51,6 +51,21 @@
     background-color: rgb(241, 239, 239);
     padding: 30px 50px;
 }
+.homeCardWrapper{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+.homeCard{
+    width: 200px;
+    height: 200px;
+    border: 2px solid grey;
+    display: grid;
+    place-items: center;
+    place-content: center;
+}
 
 .rightTopHeader{
     display: flex;
