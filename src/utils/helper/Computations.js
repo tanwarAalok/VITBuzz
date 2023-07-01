@@ -16,10 +16,10 @@ const BarColorWidth = (value) => {
   const percentageValue = value * 20;
 
   if (percentageValue >= 80) {
-    return { backgroundColor: "green", width: `${percentageValue}%` };
+    return { backgroundColor: "info", width: percentageValue };
   } else if (percentageValue >= 50) {
-    return { backgroundColor: "yellow", width: `${percentageValue}%` };
-  } else return { backgroundColor: "red", width: `${percentageValue}%` };
+    return { backgroundColor: "warning", width: percentageValue };
+  } else return { backgroundColor: "danger", width: percentageValue };
 };
 
 module.exports = {

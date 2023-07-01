@@ -1,45 +1,33 @@
 import { BarColorWidth } from '@/utils/helper/Computations';
 import React, { Fragment } from 'react'
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 
 const RatingGraphs = ({ styles, data }) => {
-
   return (
     <Fragment>
       <div className={styles.ratingDiv}>
         <p>Overall Rating</p>
         <div className={styles.barParent}>
-          <div
-            style={BarColorWidth(data.overallRating)}
-            className={styles.bar}
-          ></div>
+            <ProgressBar variant={BarColorWidth(data.overallRating).backgroundColor} now={BarColorWidth(data.overallRating).width} />
         </div>
       </div>
       <div className={styles.ratingDiv}>
         <p>Paper Rating</p>
         <div className={styles.barParent}>
-          <div
-            style={BarColorWidth(data.overallPaperRating)}
-            className={styles.bar}
-          ></div>
+            <ProgressBar variant={BarColorWidth(data.overallPaperRating).backgroundColor} now={BarColorWidth(data.overallPaperRating).width} />
         </div>
       </div>
       <div className={styles.ratingDiv}>
         <p>Teaching Rating</p>
         <div className={styles.barParent}>
-          <div
-            style={BarColorWidth(data.overallTeachingRating)}
-            className={styles.bar}
-          ></div>
+            <ProgressBar variant={BarColorWidth(data.overallTeachingRating).backgroundColor} now={BarColorWidth(data.overallTeachingRating).width} />
         </div>
       </div>
       <div className={styles.ratingDiv}>
         <p>Behaviour Rating</p>
         <div className={styles.barParent}>
-          <div
-            style={BarColorWidth(data.overallBehaviourRating)}
-            className={styles.bar}
-          ></div>
+            <ProgressBar variant={BarColorWidth(data.overallBehaviourRating).backgroundColor} now={BarColorWidth(data.overallBehaviourRating).width} />
         </div>
       </div>
     </Fragment>

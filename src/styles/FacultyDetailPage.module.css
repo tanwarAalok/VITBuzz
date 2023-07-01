@@ -26,7 +26,7 @@
     left: 20%;
     bottom: 15px;
     background: rgba(255, 255, 255, 0.8);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 13px;
     display: grid;
     place-content: center;
@@ -99,9 +99,7 @@
 
 .barParent{
     width: 80%;
-    border: 1px solid grey;
     height: 30px;
-    border-radius: 2px;
 }
 .bar{
     border-radius: 2px;
@@ -158,7 +156,7 @@
     color: white;
 }
 .likePart > p {
-    font-family: 'Poppins';
+    font-family: 'Poppins', serif;
     font-style: normal;
     font-weight: 500;
     font-size: 20px;
