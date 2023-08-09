@@ -22,8 +22,13 @@ const BarColorWidth = (value) => {
   } else return { backgroundColor: "danger", width: percentageValue };
 };
 
+const isAdmin = (status, email) => {
+  return status === "authenticated" && email === process.env.NEXT_PUBLIC_ADMIN
+}
+
 module.exports = {
   setLikeStatus,
   formattedName,
   BarColorWidth,
+  isAdmin
 };

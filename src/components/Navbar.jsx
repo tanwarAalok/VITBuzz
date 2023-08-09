@@ -7,10 +7,10 @@ import {LogInIcon, LogOutIcon} from "@/utils/Icons";
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Hamberger from "../assets/hamberger.png";
+import {Button} from "react-bootstrap";
 
 const NavbarComponent = () => {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
 
   return (
       <Navbar expand="lg" style={{background: '#020381', color: 'white'}}>
@@ -34,7 +34,14 @@ const NavbarComponent = () => {
                       <Nav.Link className="mx-3" href="/mentorship">Mentors</Nav.Link>
                   </Nav>
                   {
-                      !session ? <LogInIcon className="mx-3 mt-1" onClick={() => signIn()} /> : <LogOutIcon className="mx-3 mt-1" onClick={() => signOut()} />
+                      !session ? <LogInIcon className="mx-3 mt-1" onClick={() => signIn()} /> : (
+                          <div className="d-flex align-items-center">
+                              {
+                                  session?.role === "admin" ? <Button href="/admin">Admin Panel</Button> : ""
+                              }
+                              <LogOutIcon className="mx-3" onClick={() => signOut()} />
+                          </div>
+                      )
                   }
               </Navbar.Collapse>
           </Container>

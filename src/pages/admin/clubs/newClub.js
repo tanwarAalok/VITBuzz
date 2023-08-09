@@ -1,7 +1,9 @@
 import AdminDrawer from "@/components/AdminDrawer";
 import ClubForm from "@/components/ClubForm";
 import styles from "@/styles/AdminHome.module.css";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
+import {signIn, useSession} from "next-auth/react";
+import {useRouter} from "next/router";
 
 const NewClub = () => {
   const [data, setData] = useState({});

@@ -2,9 +2,12 @@ import AdminDrawer from "@/components/AdminDrawer";
 import FacultyForm from "@/components/FacultyForm";
 import PaperForm from "@/components/Paperform";
 import styles from "@/styles/AdminHome.module.css";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
+import {signIn, useSession} from "next-auth/react";
+import {useRouter} from "next/router";
 
 const NewPaper = () => {
+
   const [data, setData] = useState({});
   return (
     <>

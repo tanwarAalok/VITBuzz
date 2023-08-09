@@ -14,7 +14,8 @@ import SomethingWentWrong from "@/components/SomethingWentWrong";
 import axios from "axios";
 
 const FacultyDetails = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
   const { query } = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -46,10 +47,10 @@ const FacultyDetails = () => {
   }, [query, trigger]);
 
   useEffect(() => {
-    if (ratingData && session) {
+    if (ratingData && (status === "authenticated")) {
       setRated(checkIfAlreadyRated(ratingData.reviews));
     }
-  }, [ratingData, session])
+  }, [ratingData, status])
 
 
   const {

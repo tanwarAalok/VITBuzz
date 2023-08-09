@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "@/styles/AdminHome.module.css";
 import AdminDrawer from "@/components/AdminDrawer";
 import { useRouter } from "next/router";
@@ -6,9 +6,9 @@ import SomethingWentWrong from "@/components/SomethingWentWrong";
 import useFetch from "@/utils/hooks/useFetch";
 import PaperTable from "@/components/PaperTable";
 import Loader from "@/components/Loading";
+import {signIn, useSession} from "next-auth/react";
 
 const PaperManage = () => {
-  const router = useRouter();
 
   const { isLoading, apiData, serverError, setUpdate } = useFetch("/api/paper");
   if (serverError) return <SomethingWentWrong error={serverError} />;

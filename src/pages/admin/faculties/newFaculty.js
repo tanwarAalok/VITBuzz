@@ -1,7 +1,9 @@
 import AdminDrawer from '@/components/AdminDrawer';
 import FacultyForm from '@/components/FacultyForm';
 import styles from "@/styles/AdminHome.module.css";
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
+import {signIn, useSession} from "next-auth/react";
+import {useRouter} from "next/router";
 
 const NewFaculty = () => {
     const [data, setData] = useState({});

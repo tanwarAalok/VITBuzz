@@ -7,7 +7,7 @@ const AdminDrawer = ({styles}) => {
       <h4>Hello, Admin !!</h4>
       <div className={styles.divider}></div>
       <div className={styles.linkWrapper}>
-        <Link href={"/admin/home"}>Home</Link>
+        <Link href={"/admin"}>Home</Link>
         <Link href={"/admin/faculties"}>Faculties</Link>
         <Link href={"/admin/papers"}>Papers</Link>
         <Link href={"/admin/clubs"}>Clubs</Link>
