@@ -1,5 +1,5 @@
 const connectDatabase = require("../../utils/db");
-import { ClubController } from "@/controllers";
+import { ClubController } from "src/server/controllers";
 import NextCors from "nextjs-cors";
 
 

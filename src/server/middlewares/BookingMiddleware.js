@@ -1,6 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
-const { ErrorResponse } = require("../utils/common");
-const AppError = require("../utils/error/app-error");
+const { ErrorResponse } = require("../../utils/common");
+const AppError = require("../../utils/error/app-error");
 
 function validateBookingRequest(req, res, next) {
   if (!req.body.flightId) {

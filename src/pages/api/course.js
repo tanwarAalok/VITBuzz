@@ -1,6 +1,6 @@
 const connectDatabase = require("../../utils/db");
 import NextCors from "nextjs-cors";
-import { CourseController } from '../../controllers';
+import { CourseController } from '../../server/controllers';
 
 connectDatabase();
 

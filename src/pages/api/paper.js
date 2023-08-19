@@ -2,7 +2,7 @@ const connectDatabase = require("../../utils/db");
 import { ErrorResponse, SuccessResponse } from "@/utils/common";
 import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
-const { Paper } = require("../../models");
+const { Paper } = require("../../server/models");
 
 connectDatabase();
 

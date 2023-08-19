@@ -7,7 +7,7 @@ import Loader from "@/components/Loading";
 import {signIn, useSession} from "next-auth/react";
 import {useRouter} from "next/router";
 import {isAdmin} from "@/utils/helper/Computations";
-import ProtectedRoute from "@/middlewares/ProtectedRoute";
+import ProtectedRoute from "@/server/middlewares/ProtectedRoute";
 import {notFound, redirect} from "next/navigation";
 
 const AdminHome = () => {

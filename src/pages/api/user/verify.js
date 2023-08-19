@@ -1,6 +1,6 @@
 const connectDatabase = require("../../../utils/db");
 import NextCors from "nextjs-cors";
-const User = require("../../../models/UserModel");
+const User = require("@/server/models/UserModel");
 
 export default async function handler(req, res) {
   await NextCors(req, res, {

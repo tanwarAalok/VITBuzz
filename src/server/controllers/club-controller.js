@@ -1,6 +1,6 @@
 const { ClubService } = require("../services");
 const { StatusCodes } = require("http-status-codes");
-const { SuccessResponse, ErrorResponse } = require("../utils/common");
+const { SuccessResponse, ErrorResponse } = require("../../utils/common");
 
 async function createClub(req, res) {
   try {

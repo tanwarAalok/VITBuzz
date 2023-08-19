@@ -1,6 +1,6 @@
 const { CourseRepository } = require("../repositories");
 const courseRepository = new CourseRepository();
-const AppError = require("../utils/error/app-error");
+const AppError = require("../../utils/error/app-error");
 const { StatusCodes } = require("http-status-codes");
 
 async function createCourse(data) {

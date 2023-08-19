@@ -1,5 +1,5 @@
 const connectDatabase = require("../../../utils/db");
-import { ReviewController } from "@/controllers";
+import { ReviewController } from "src/server/controllers";
 import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";
 

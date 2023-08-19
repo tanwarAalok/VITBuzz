@@ -1,6 +1,6 @@
 const { ClubRepository } = require("../repositories");
 const clubRepository = new ClubRepository();
-const AppError = require("../utils/error/app-error");
+const AppError = require("../../utils/error/app-error");
 const { StatusCodes } = require("http-status-codes");
 
 async function createClub(data) {

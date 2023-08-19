@@ -5,7 +5,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter"
 
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.SECRET,
   providers: [
     GoogleProvider({
       profile(profile){
@@ -46,12 +46,6 @@ export default NextAuth({
       }
       return false;
     },
-    // async session({session, user}){
-    //   if(session?.user) {
-    //     session.user.role = user?.role;
-    //   }
-    //   return session;
-    // },
   },
   session: {
     strategy: "jwt",

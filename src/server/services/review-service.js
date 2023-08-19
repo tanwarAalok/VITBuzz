@@ -1,4 +1,4 @@
-const { Faculty, Review, LikedReview } = require("@/models");
+const { Faculty, Review, LikedReview } = require("@/server/models");
 const UserService = require('./user-service')
 const FacultyService = require("./faculty-service");
 const AppError = require("@/utils/error/app-error");

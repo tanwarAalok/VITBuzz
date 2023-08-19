@@ -1,6 +1,6 @@
 import { FacultyRepository } from "../repositories";
 const facultyRepository = new FacultyRepository();
-import AppError from "../utils/error/app-error";
+import AppError from "../../utils/error/app-error";
 import { StatusCodes } from "http-status-codes";
 
 async function createFaculty(data) {

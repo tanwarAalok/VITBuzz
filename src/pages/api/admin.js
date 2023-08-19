@@ -1,5 +1,5 @@
 const connectDatabase = require('../../utils/db')
-import { User, Faculty, Paper, Club } from "@/models";
+import { User, Faculty, Paper, Club } from "src/server/models";
 import { ErrorResponse, SuccessResponse } from "@/utils/common";
 import { StatusCodes } from "http-status-codes";
 import NextCors from "nextjs-cors";

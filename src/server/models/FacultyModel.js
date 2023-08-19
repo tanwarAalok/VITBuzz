@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { GENDERS } = require('../utils/common/enums');
+const { GENDERS } = require('../../utils/common/enums');
 const {MALE, FEMALE, OTHER} = GENDERS;
 
 const FacultySchema = new mongoose.Schema({

@@ -1,4 +1,4 @@
-const AppError = require("../utils/error/app-error");
+const AppError = require("../../utils/error/app-error");
 const { StatusCodes } = require("http-status-codes")
 
 class CrudRepository {
