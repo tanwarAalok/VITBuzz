@@ -95,6 +95,7 @@ const RatingModal = ({ show, handleClose, trigger, setTrigger }) => {
             <Form.Control
               type="text"
               placeholder="Leave a comment..."
+              required={true}
               onChange={(e) => setComment(e.target.value)}
             />
           </Form.Group>
