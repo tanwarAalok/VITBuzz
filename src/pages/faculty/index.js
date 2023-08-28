@@ -6,35 +6,39 @@ import filterImg from "../../assets/filterImg.png";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 import SearchBar from "@/components/SearchBar";
-import useFetch from "@/utils/hooks/useFetch";
 import { useRouter } from "next/router";
 import Loader from "@/components/Loading";
 import SomethingWentWrong from "@/components/SomethingWentWrong";
+import {useDispatch, useSelector} from "react-redux";
+import {setGender, setSortType} from "@/redux/slices/facultySlice"
+import {fetchAllFaculty} from "@/utils/apiFunctions/facultyApi";
 
 const Faculty = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  const [gender, setGender] = useState("");
-  const [sortType, setSortType] = useState("");
-  const [searchInput, setsearchInput] = useState("");
+  const {loading, error, allFaculty: apiData, gender, sortType} = useSelector(state => state.faculty);
+
+  const [searchInput, setSearchInput] = useState("");
   const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
+     if(dispatch) fetchAllFaculty(dispatch, gender, sortType)
+  }, [gender, sortType, dispatch])
+
+  useEffect(() => {
     if (router) {
-      if (router.query.gender) setGender(router.query.gender);
-      if (router.query.sortType) setSortType(router.query.sortType);
+      if (router.query.gender) dispatch(setGender(router.query.gender));
+      if (router.query.sortType) dispatch(setSortType(router.query.sortType));
     }
   }, [router]);
 
-  const { isLoading, apiData, serverError } = useFetch(
-    `/api/faculty?gender=${gender}&sortType=${sortType}`
-  );
 
-  if (serverError) return <SomethingWentWrong error={serverError} />;
+  if (error) return <SomethingWentWrong error={error} />;
 
   const handleSearch = (e) => {
     const searchWord = e.target.value;
-    setsearchInput(searchWord);
+    setSearchInput(searchWord);
 
     const newFilter = apiData?.filter((value) => {
       return value?.name?.toLowerCase().includes(searchWord.toLowerCase());
@@ -47,10 +51,28 @@ const Faculty = () => {
     }
   };
 
+  const handleGenderChange = (e) => {
+    const query = { ...router.query, gender: e.target.value };
+    if (e.target.value === "") {
+      delete query.gender;
+    }
+    router.replace({ query: query });
+    dispatch(setGender(e.target.value));
+  }
+
+  const handleSortChange = (e) => {
+    const query = { ...router.query, sortType: e.target.value };
+    if (e.target.value == "") {
+      delete query.sortType;
+    }
+    router.replace({ query: query });
+    dispatch(setSortType(e.target.value));
+  }
+
   return (
     <>
       <Navbar />
-      {isLoading ? (
+      {loading ? (
         <Loader />
       ) : (
         <div className={styles.facultyPage}>
@@ -63,14 +85,7 @@ const Faculty = () => {
             <div className={styles.filters}>
               <select
                 value={gender}
-                onChange={(e) => {
-                  const query = { ...router.query, gender: e.target.value };
-                  if (e.target.value == "") {
-                    delete query.gender;
-                  }
-                  router.replace({ query: query });
-                  setGender(e.target.value);
-                }}
+                onChange={handleGenderChange}
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -79,18 +94,11 @@ const Faculty = () => {
 
               <select
                 value={sortType}
-                onChange={(e) => {
-                  const query = { ...router.query, sortType: e.target.value };
-                  if (e.target.value == "") {
-                    delete query.sortType;
-                  }
-                  router.replace({ query: query });
-                  setSortType(e.target.value);
-                }}
+                onChange={handleSortChange}
               >
                 <option value="">Sort by Rating</option>
-                <option value={-1}>Highest to Lowest</option>
-                <option value={1}>Lowest to highest</option>
+                <option value="-1">Highest to Lowest</option>
+                <option value="1">Lowest to highest</option>
               </select>
             </div>
           </div>

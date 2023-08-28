@@ -1,9 +1,9 @@
 
-.custom{
-    color: white;
-}
 .custom > span{
-    background-image: url('/_next/static/media/hamberger.e62e9a91.png');
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/vitbuzz-c84dd.appspot.com/o/hamberger.png?alt=media&token=5ce65c34-4f5f-49ba-bdd8-6a0d3c8bb5b6");
+}
+.custom {
+    color: white;
 }
 
 .buzz{

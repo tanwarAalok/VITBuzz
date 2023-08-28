@@ -5,28 +5,34 @@ import LandingPage from "@/components/LandingPage";
 import useFetch from "@/utils/hooks/useFetch";
 import Loader from "@/components/Loading";
 import SomethingWentWrong from "@/components/SomethingWentWrong";
-import {useSession} from "next-auth/react";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import axios from "axios";
-import {Cookie} from "@next/font/google";
-import {cookies} from "next/headers";
+import {useDispatch, useSelector} from "react-redux";
+// import {setLoading, getTopFaculty, setError} from "../redux/slices/facultySlice";
+import {fetchTopFaculty} from "@/utils/apiFunctions/facultyApi";
+
 
 export default function Home() {
 
-  const { isLoading, apiData, serverError } = useFetch("/api/faculty/top");
-  if (serverError) return <SomethingWentWrong error={serverError} />;
+  const dispatch = useDispatch();
 
+  useEffect( () => {
+      if(dispatch) fetchTopFaculty(dispatch);
+  }, [dispatch]);
+
+  const {loading, error, topFaculty} = useSelector(state => state.faculty);
+  if(error) return <SomethingWentWrong error={error} />
 
   return (
     <>
       <Navbar />
-      {isLoading ? (
+      {loading ? (
         <Loader />
       ) : (
         <LandingPage
           styles={styles}
-          topFaculty={apiData}
-          isLoading={isLoading}
+          topFaculty={topFaculty}
+          isLoading={loading}
         />
       )}
       <Footer />
