@@ -76,43 +76,38 @@ const Faculty = () => {
         <Loader />
       ) : (
         <div className={styles.facultyPage}>
-          <div className={styles.f_left}>
-            <div className={styles.filterBtn}>
-              Filters
-              <Image src={filterImg} alt="filterIMg" />
-            </div>
 
-            <div className={styles.filters}>
-              <select
-                value={gender}
-                onChange={handleGenderChange}
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
+            <div className={styles.filtersWrapper}>
 
-              <select
-                value={sortType}
-                onChange={handleSortChange}
-              >
-                <option value="">Sort by Rating</option>
-                <option value="-1">Highest to Lowest</option>
-                <option value="1">Lowest to highest</option>
-              </select>
-            </div>
-          </div>
-
-          {/* *************************************** */}
-
-          <div className={styles.f_right}>
-            <div className={styles.searchInput}>
               <SearchBar searchInput={searchInput} handleSearch={handleSearch} />
+
+              <div className={styles.filters}>
+                <select
+                    value={gender}
+                    onChange={handleGenderChange}
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+
+                <select
+                    value={sortType}
+                    onChange={handleSortChange}
+                >
+                  <option value="">Sort by Rating</option>
+                  <option value="-1">Highest to Lowest</option>
+                  <option value="1">Lowest to highest</option>
+                </select>
+              </div>
+
             </div>
+
+
 
             {/* *************************************** */}
 
-            <div className={styles.f_right_bottom}>
+            <div className={styles.contentWrapper}>
               {searchData.length > 0
                 ? searchData?.map((prof) => (
                     <FacultyCard
@@ -129,7 +124,7 @@ const Faculty = () => {
                     />
                   ))}
             </div>
-          </div>
+          {/*</div>*/}
         </div>
       )}
       <Footer />

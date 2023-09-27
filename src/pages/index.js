@@ -5,7 +5,7 @@ import LandingPage from "@/components/LandingPage";
 import useFetch from "@/utils/hooks/useFetch";
 import Loader from "@/components/Loading";
 import SomethingWentWrong from "@/components/SomethingWentWrong";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 // import {setLoading, getTopFaculty, setError} from "../redux/slices/facultySlice";

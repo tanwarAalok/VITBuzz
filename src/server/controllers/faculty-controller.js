@@ -10,7 +10,6 @@ async function createFaculty(req, res) {
       image: req.body.image,
       description: req.body.description,
       gender: req.body.gender,
-      image: req.body.image,
       approved: req.body.approved,
     });
 

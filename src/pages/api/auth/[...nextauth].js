@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import clientPromise from "@/pages/api/auth/lib/mongoClient";
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
-
 export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
