@@ -40,3 +40,10 @@
     justify-content: space-around;
     overflow-y: auto;
 }
+
+@media (max-width: 500px) {
+    .filtersWrapper{
+        width: 100%;
+        margin: 10px 0;
+    }
+}

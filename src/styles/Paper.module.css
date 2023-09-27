@@ -7,6 +7,9 @@
     height: 40px;
     padding: 0px 20px;
     flex: 1;
+    background: #eeeeee;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .topOptions{
@@ -40,4 +43,11 @@
 
 .result > object::-webkit-scrollbar {
     display: none;
+}
+
+@media (max-width: 500px) {
+    .topOptions{
+        margin: 50px 5vw;
+        width: 90vw;
+    }
 }

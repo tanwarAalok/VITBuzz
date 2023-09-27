@@ -32,6 +32,7 @@ const Paper = () => {
         <Loader />
       ) : (
         <div className={styles.paperPage}>
+
           <div className={styles.topOptions}>
             <div className={styles.selectWrapper}>
               <select
@@ -76,6 +77,7 @@ const Paper = () => {
               </select>
             </div>
           </div>
+
           {apiData && apiData.length > 0 ? (
             <PaperCarousel styles={styles} apiData={apiData} />
           ) : (
